@@ -1,0 +1,568 @@
+.hero-image {
+    display: flex;
+    align-items: center;
+    height: 100vh
+}
+
+.hero-image .hero-content {
+    padding-top: 144px;
+}
+
+.hero-image {
+    position: relative;
+    min-height: calc(100vh - 72px);
+    background: url("../../../images/xemay_phuot.jpg") no-repeat;
+    background-position: 50%
+}
+
+.hero-image:before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.65);
+    text-align: center
+}
+
+.hero-image .hero-content {
+    position: relative;
+    color: #fff
+}
+
+.hero-image .slogan {
+    text-transform: uppercase;
+    font-family: Roboto Condensed,sans-serif;
+    font-weight: 900;
+    text-align: center;
+    font-size: 3.8rem
+}
+
+.hero-image .slogan span {
+    display: block
+}
+
+.hero-image .scroll-animation {
+    -o-object-fit: cover;
+    object-fit: cover;
+    object-position: 50% 50%;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -15px;
+    margin-top: -300px;
+    z-index: 999
+}
+
+.hero-image .scroll-animation .mouse {
+    height: 45px;
+    width: 30px;
+    border-radius: 30px;
+    border: 2px solid #fff;
+    margin-bottom: 3px
+}
+
+.hero-image .scroll-animation .mouse .wheel {
+    animation: f 1.5s ease infinite;
+    height: 15px;
+    width: 6px;
+    background: #ffc80b;
+    margin: 3px auto;
+    border-radius: 3px
+}
+
+.hero-image .scroll-animation .arrows .first {
+    animation-delay: .1s
+}
+
+.hero-image .scroll-animation .arrows .second {
+    animation-delay: .2s
+}
+
+.hero-image .scroll-animation .arrows .third {
+    animation-delay: .3s
+}
+
+.hero-image .scroll-animation .arrows span {
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid #ffc107;
+    border-bottom: 2px solid #ffc107;
+    transform: rotate(45deg);
+    display: block;
+    margin: 0 auto;
+    animation: e 2s infinite
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.key-slogan h1 {
+    font-weight: 900;
+    font-size: 3.5rem;
+    line-height: 1.5;
+}
+
+.key-slogan p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.8;
+}
+
+@media (min-width: 768px) {
+    .col-md-5 {
+        -ms-flex: 0 0 41.666667%;
+        flex: 0 0 41.666667%;
+        max-width: 41.666667%;
+    }
+}
+
+.car-rental-wrapper {
+    background: #00000085;
+    padding: 30px;
+}
+
+.car-rental-wrapper i {
+    color: #bfbfbf;
+    position: absolute;
+    top: 11px;
+    left: 10px;
+    z-index: 2;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px / 1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+form {
+    display: block;
+    margin-top: 0em;
+    unicode-bidi: isolate;
+}
+
+.car-rental-wrapper .location-title {
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.content-inputs .location-drop, .content-inputs .date-select {
+    width: 100%;
+}
+
+.content-inputs .email-wrapper, .content-inputs .location-drop, .content-inputs .date-select {
+    position: relative;
+}
+
+.same-return {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.car-rental-wrapper input.same-return-content {
+    margin-right: 10px;
+}
+
+.car-rental-wrapper .same-return-content {
+    color: #fff;
+    font-weight: 300;
+    margin-bottom: 0;
+    font-size: 15px;
+}
+
+.car-rental-wrapper .same-return-content {
+    color: #fff;
+    font-weight: 300;
+    margin-bottom: 0;
+    font-size: 15px;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+#return_loc_wrapper {
+    margin-bottom: 10px;
+}
+
+.car-rental-wrapper .form-control {
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 20px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 35px;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #444;
+    line-height: 28px;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+    display: block;
+    padding-left: 8px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 40px !important;
+    padding-left: 35px !important;
+}
+
+input.car-rental-do-search {
+    background: #ffc107 !important;
+    border: 2px solid #fed03d !important;
+    color: #322f31 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.date-pickers, .button-submit {
+    cursor: pointer !important;
+}
+
+.button-submit {
+    width: 15%;
+    padding: 10px 25px 10px 25px;
+    margin-left: auto;
+    font-weight: bolder;
+    font-family: inherit;
+    color: #000;
+}
+
+.car-rental-wrapper .select2-container .select2-selection--single {
+    height: 40px;
+    border-radius: 0;
+    border: none;
+    line-height: 40px;
+    width: 466px;
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+
+.select2-container .select2-selection--single {
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    height: 28px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+.bg-light {
+  background: #e7e9ef;
+}
+
+.choices__list--dropdown .choices__item--selectable {
+  padding-right: 1rem;
+}
+
+.choices__list--single {
+  padding: 0;
+}
+
+.card {
+  transform: translateY(-50%);
+}
+
+.choices[data-type*=select-one]:after {
+  right: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s;
+}
+
+.choices[data-type*=select-one] .choices__input {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    margin: 0;
+    color: #000;
+
+}
+
+.choices__item, .choices__input {
+    color: black !important;
+}
+
+.choices__item--selectable {
+    margin-left: 35px !important;
+}
+
+.checkbox-wrapper-22 .switch {
+display: inline-block;
+height: 34px;
+position: relative;
+width: 60px;
+margin-top:15px;
+margin-right: 15px;
+}
+
+.checkbox-wrapper-22 .switch input {
+display:none;
+}
+
+.checkbox-wrapper-22 .slider {
+background-color: #ccc;
+bottom: 0;
+cursor: pointer;
+left: 0;
+position: absolute;
+right: 0;
+top: 0;
+transition: .4s;
+
+}
+
+.checkbox-wrapper-22 .slider:before {
+background-color: #fff;
+bottom: 4px;
+content: "";
+height: 26px;
+left: 4px;
+position: absolute;
+transition: .4s;
+width: 26px;
+}
+
+.checkbox-wrapper-22 input:checked + .slider {
+background-color: #66bb6a;
+}
+
+.checkbox-wrapper-22 input:checked + .slider:before {
+transform: translateX(26px);
+}
+
+.checkbox-wrapper-22 .slider.round {
+border-radius: 34px;
+}
+
+.checkbox-wrapper-22 .slider.round:before {
+border-radius: 50%;
+}
+
+.s-location {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+section .s-title {
+    text-transform: uppercase;
+    font-weight: 900;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 50px;
+    color: #322f31;
+}
+
+.location-item {
+    margin-bottom: 30px;
+}
+
+.location-item .inner {
+    position: relative;
+}
+
+.s-list-moto {
+    background: #495057;
+    color: #fff;
+    padding: 70px 0;
+}
+
+.s-list-moto .s-title {
+    color: #ffc107;
+}
+
+.s-list-moto .sub-title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 300;
+    max-width: 85%;
+    margin: 0 auto 30px;
+}
+
+.s-list-moto .row {
+    margin-bottom: 30px;
+    max-height: 672px !important;
+    overflow: hidden;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.list-moto .moto-item {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.moto-item .moto-header {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.list-moto .moto-link {
+    position: static;
+}
+
+.s-list-moto .cta-bottom {
+    margin-top: 30px;
+}
+
+.moto-item .inner:hover {
+    background: #459f99;
+}
+
+.moto-item .inner:hover .moto-item-price {
+    color: #fff;
+}
+
+
+.list-moto .moto-item .inner {
+    position: relative;
+}
+
+.list-moto .inner {
+    min-height: 470px;
+    background: #dedddd;
+}
+
+.bg-gray, .moto-item.bg-gray .moto-item-price {
+    color: black;
+}
+
+.list-moto .bg-gray .moto-item-price {
+    color: #ffc107;
+}
+
+.s-list-moto .moto-item-price {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.list-moto .inner:before {
+    content: '';
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 200, 11, .6);
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+img.lazyloaded {
+    -webkit-transition: opacity .5s linear 0.2s;
+    -moz-transition: opacity .5s linear 0.2s;
+    transition: opacity .5s linear 0.2s;
+    opacity: 1;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-style: none;
+    vertical-align: middle;
+}
+
+.s-list-moto .moto-item-price span {
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.s-list-moto .moto-item-title span {
+    font-weight: 800;
+    font-size: 30px;
+}
+
+.btn:hover {
+    color: #212529;
+    text-decoration: none;
+}
+
+.moto-item .btn-rental {
+    z-index: 2;
+}
+
+.moto-item .inner:hover .btn-rental {
+    background: #333;
+    color: #fff;
+}
+
+.list-moto .moto-item:hover .btn-rental {
+    opacity: 1;
+}
+
+.list-moto .moto-item .btn-rental {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    margin: 0;
+    margin-left: -60px;
+    top: auto;
+    transition: all 0.3s;
+    opacity: 0;
+}
+
+.s-list-moto .moto-item .btn-rental {
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: block;
+    width: 120px;
+    margin: 15px auto;
+    font-size: 15px;
+    color: #322f31;
+}
+
+.s-list-moto .btn-price:hover {
+    background: #ebeced;
+}
+
+.s-list-moto .btn-price {
+    font-weight: 300;
+    font-family: Roboto, sans-serif;
+    text-transform: uppercase;
+    border-radius: 0;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 15px;
+    position: relative;
+    background: #537599;
+}
+

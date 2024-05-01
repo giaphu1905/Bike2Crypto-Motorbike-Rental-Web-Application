@@ -1,0 +1,35 @@
+{% extends "home_base.html" %}
+{% load static %}
+{% block title%}Đặt xe tại ...{% endblock %}
+
+{% block mycss%}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="page-cover location-page-cover">
+        <div class="overlay-color"></div>
+        <div class="container">
+            <h1 class="page-title text-center">
+                Đặt xe tại Hà Nội		
+            </h1>
+            <p id="breadcrumbs">
+                <span>
+                    <span>
+                        <a href="/home">Trang chủ</a>
+                    </span> » 
+                    <span class="breadcrumb_last" aria-current="page">
+                        <strong>Đặt xe tại Hà Nội</strong>
+                    </span>
+                </span>
+            </p>	
+            </div>
+    </div>
+
+{% endblock %}
+
+{% block myjs %}
+    {{ block.super }}
+    <script src="{% static '' %}"></script>
+{% endblock %}

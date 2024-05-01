@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Đăng ký{% endblock %}
+{% block mycss %}
+  <link rel="stylesheet" href="{% static 'rent/login/css/main.css'%}">
+  <link rel="stylesheet" href="{% static 'rent/login/css/util.css'%}">
+{% endblock %}
+
+{% block content %}
+  <div class="limiter">
+    <div class="container-login100" style="background-image: url('{% static 'images/bg-sg.jpg'%}');">
+        <div class="wrap-login100">
+            <form action="{% url 'rent:signup' %}" class="login100-form validate-form" method="post" id="signup-form">
+                {% csrf_token %}
+                <span class="login100-form-logo">
+                    <a href=""><img src="{% static 'images/logo.png'%}" alt="logo" width="100" height="100"></a>
+                </span>
+
+                <span class="login100-form-title p-b-34 p-t-27">
+                    Đăng ký
+                </span>
+                <div class="wrap-input100 validate-input" data-validate = "Enter username">
+                    {{ form_signup.username }}
+                    <span class="focus-input100 " data-placeholder="&#xf207;"></span>
+                </div>
+                {% if form_signup.username.errors %}
+                    <div class="error" style="color: red;">{{ form_signup.username.errors }}</div>
+                {% endif %}
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    {{ form_signup.password1 }}
+                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                </div>
+                {% if form_signup.password1.errors %}
+                    <div class="error" style="color: red;">{{ form_signup.password1.errors }}</div>
+                {% endif %}
+                <div class="wrap-input100 validate-input" data-validate="Enter confirm password">
+                    {{ form_signup.password2 }} 
+                    <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                </div>
+                {% if form_signup.password2.errors %}
+                    <div class="error" style="color: red;">{{ form_signup.password2.errors }}</div>
+                {% endif %} 
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Đăng ký
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
+
+
+  <div id="dropDownSelect1"></div>
+
+    <script src="{% static 'rent/login/js/main.js' %}"></script>
+{% endblock %}

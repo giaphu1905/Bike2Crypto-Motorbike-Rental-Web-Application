@@ -1,0 +1,119 @@
+header {
+    position: fixed;
+    border-bottom: .0625rem solid var(--gray-300-gray-800);
+    background-color: #5c9bc2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    z-index: 999;
+}
+
+.navbar {
+    position: fixed;
+    height: 3.75rem;
+}
+
+.search-container {
+    position: relative;
+}
+  
+.search-icon {
+position: absolute;
+top: 50%;
+right: 10px;
+transform: translateY(-50%);
+color: #888;
+font-size: 1.2em;
+}
+
+.search-input {
+padding-right: 40px;
+}
+
+body {
+    background-color: #e2e2e5;
+
+}
+
+.container {
+    padding-top: 3.75rem;
+}
+
+.col-4 {
+    flex: 0 0 32%;
+    max-width: 32%;
+    margin: 0.5%;
+}
+
+.card {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+    border-radius: 10px;
+    padding: 0;
+    box-shadow: 0 0 10px rgba(33, 33, 33, .2);
+    background-color: #d6dbde;
+    transition: background-color 0.3s ease;
+}
+
+.card:hover {
+    background-color: #a7d0ea;
+    cursor: pointer;
+}
+
+.card-body {
+    padding: 5px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 3px;
+    padding-right: 10px;
+}
+
+.card:hover .card-footer {
+    padding-bottom: 15px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.card-subtitle {
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+
+.btn-primary {
+    background-color: #406286;
+    border-color: #2c4e71;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+.card a {
+    text-decoration: none;
+    color: black;
+}
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.btn-del-card {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin-right: 20px;
+}
+.btn-del-card:hover {
+    color: red;
+}
+

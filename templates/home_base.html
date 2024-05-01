@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block mycss %}
+    <link rel="stylesheet" href="{% static 'rent/home/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'rent/home/css/userdropdown_home.css' %}">
+{% endblock %}
+
+{% block header %}
+    <header id="header" class="navbar navbar-expand-lg navbar-dark" role="navigation">
+        <div class="collapse navbar-collapse d-flex flex-lg-fill justify-content-between" id="navbarNav">
+            <ul class="navbar-nav align-items-center ml-auto">
+                <li class="nav-item">
+                    <a href="{% url 'rent:home' %}"><img src="{% static 'images/logo.png' %}" alt="logo" width="70" height="70"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white mx-4" href="{% url 'rent:home' %}">Trang chủ</a>
+                </li>
+            </ul>                    
+            <ul class="navbar-nav align-items-center ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="">THUÊ XE MÁY</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="">BẢNG GIÁ</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        CHÍNH SÁCH
+                    </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">CHÍNH SÁCH THUÊ XE MÁY</a></li>
+                        <li><a class="dropdown-item" href="#">CHÍNH SÁCH KHÁCH HÀNG THÂN THIẾT</a></li>
+                      </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="">GIỚI THIỆU</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="">LIÊN HỆ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="">BLOG DU LỊCH</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <button type="button" class="d-flex align-items-center mx-4" data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" data-offset="0, 20"  style="background-color: #5c9bc2;border: 0;">    
+                        <div class="profile-info">
+                            <h3>{{user_login.username}}</h3>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end mx-4">
+                        <a class="dropdown-item" href="{% url 'user:profile_user' %}"> <span class=""></span>Hồ sơ</a>
+                        <a class="dropdown-item" href="{% url 'rent:logout' %}"><span class=""></span>Đăng xuất</a>
+                    </ul>             
+                </li>
+            </ul>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block myjs %}
+    <!--<script src="{% static 'main/main.js' %}"></script>-->
+{% endblock %}
