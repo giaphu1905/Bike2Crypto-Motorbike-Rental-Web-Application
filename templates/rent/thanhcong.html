@@ -1,0 +1,66 @@
+{% extends 'home_base.html' %}
+{% load static %}
+{% block title %}
+  Đặt xe tại {{ rent_info.pickup_location }}
+{% endblock %}
+
+{% block mycss %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/main.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="page-cover location-page-cover">
+    <div class="overlay-color"></div>
+    <div class="container">
+      <h1 class="page-title text-center">Đặt xe tại {{ rent_info.pickup_location }}</h1>
+    </div>
+  </div>
+  <p id="breadcrumbs">
+    <span>
+      <span><a href="/home">Trang chủ</a></span> »
+      <span class="breadcrumb_last" aria-current="page"><strong>Đặt xe tại {{ rent_info.pickup_location }}</strong></span>
+    </span>
+  </p>
+  <div class="d-flex">
+    <h2 style="padding-left: 60px;">Xác nhận đặt thuê xe</h2>
+    <section id="main">
+        <div id="page" class="container">
+            <div id="public_pagehead" class="row"></div>
+            <div id="mainpage" class="row ">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="osections section-edit" style="display:block">
+                            <div class="appform container">
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-xs-12"></div>
+                                    </div>
+                                    <br>
+                                    <div class="alert alert-success" role="alert">
+                                        <p><span style="font-size:16px;"><strong>Đơn đặt xe thành công!</strong></span></p>
+                                        <p><span style="font-size: 14px;">Chào bạn! Cám ơn bạn đã lựa chọn LLLLL. Chúng tôi sẽ liên hệ với bạn trong khoảng thời gian sớm nhất để xác nhận lại đơn hàng.</span></p>
+                                        <p><span style="font-size: 14px;">Mã số đặt xe của bạn là <strong style="font-size: 14px;">#{{order_id}}.</strong></p>
+                                        <p><span style="font-size:14px;">Nếu có bất kỳ câu hỏi nào bạn vui lòng với chúng tôi để được giải đáp thắc mắc.</span></p>
+                                        <p><span style="font-size:14px;">Xin cám ơn!</span></p>
+                                    </div>
+                                    <form class="finalbuttons" method="post">
+                                      {% csrf_token %}
+                                      <a href="" class="btn btn-info">Xem Đặt Chỗ Của Tôi</a>
+                                      <button type="submit" class="btn btn-info">Thanh toán trực tuyến</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  
+  </div>
+{% endblock %}
+
+{% block myjs %}
+  {{ block.super }}
+
+{% endblock %}

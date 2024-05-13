@@ -1,0 +1,56 @@
+{% extends 'home_base.html' %}
+{% load static %}
+{% block title %}
+  Đặt xe tại {{ rent_info.pickup_location }}
+{% endblock %}
+
+{% block mycss %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/main.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="page-cover location-page-cover">
+    <div class="overlay-color"></div>
+    <div class="container">
+      <h1 class="page-title text-center">Đặt xe tại {{ rent_info.pickup_location }}</h1>
+    </div>
+  </div>
+  <p id="breadcrumbs">
+    <span>
+      <span><a href="/home">Trang chủ</a></span> »
+      <span class="breadcrumb_last" aria-current="page"><strong>Đặt xe tại {{ rent_info.pickup_location }}</strong></span>
+    </span>
+  </p>
+  <body>
+    <div class="caag-software-pre-loader" style="cursor: wait; display: none;"></div>    
+    <section id="main">
+        <div id="page" class="container">
+            <div id="public_pagehead" class="row"></div>
+            <div id="mainpage" class="row ">
+                <div class="container-fluid">
+                  <div class="bg-gray-100 h-screen">
+                    <div class="bg-white p-6  md:mx-auto">
+                      <div class="text-center">
+                        <img src="{% static 'images/check.png' %}" alt="success" class="text-center" style="width: 100px;">
+                        <h3 class="md:text-2xl text-base text-gray-900 font-semibold text-center">Thanh toán thành công!</h3>
+                        <p class="text-gray-600 my-2">Cảm ơn bạn đã sử dụng dịch của chúng tôi.</p>
+                        <p> Have a great day!  </p>
+                        <div class="py-10 text-center">
+                            <a href="#" class="px-12 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3">
+                                GO BACK 
+                          </a>
+                        </div>
+                      </div>
+                  </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block myjs %}
+  {{ block.super }}
+
+{% endblock %}

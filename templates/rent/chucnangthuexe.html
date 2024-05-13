@@ -1,35 +1,101 @@
-{% extends "home_base.html" %}
+{% extends 'home_base.html' %}
 {% load static %}
-{% block title%}Đặt xe tại ...{% endblock %}
+{% block title %}
+  Đặt xe tại {{ rent_info.pickup_location }}
+{% endblock %}
 
-{% block mycss%}
-    {{ block.super }}
-    <link rel="stylesheet" href="{% static '' %}">
+{% block mycss %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/popup.css' %}" />
 {% endblock %}
 
 {% block content %}
-    <div class="page-cover location-page-cover">
-        <div class="overlay-color"></div>
-        <div class="container">
-            <h1 class="page-title text-center">
-                Đặt xe tại Hà Nội		
-            </h1>
-            <p id="breadcrumbs">
-                <span>
-                    <span>
-                        <a href="/home">Trang chủ</a>
-                    </span> » 
-                    <span class="breadcrumb_last" aria-current="page">
-                        <strong>Đặt xe tại Hà Nội</strong>
-                    </span>
-                </span>
-            </p>	
-            </div>
+  <div class="page-cover location-page-cover">
+    <div class="overlay-color"></div>
+    <div class="container">
+      <h1 class="page-title text-center">Đặt xe tại {{ rent_info.pickup_location }}</h1>
     </div>
+  </div>
+  <p id="breadcrumbs">
+    <span>
+      <span><a href="/home">Trang chủ</a></span> »
+      <span class="breadcrumb_last" aria-current="page"><strong>Đặt xe tại {{ rent_info.pickup_location }}</strong></span>
+    </span>
+  </p>
+  <form method="POST" action="" accept-charset="UTF-8" id="save-reservation-form" class="prevent-submit-by-enter loading-bar-on-submit">
+    {% csrf_token %}
 
+    {% include 'rent/sixstepline.html' %}
+
+    <div class="osections section-edit section-visible">
+      <div class="appform container-fluid">
+        
+        {% include 'rent/xemay.html' %}
+      </div>
+    </div>
+  </form>
 {% endblock %}
 
 {% block myjs %}
-    {{ block.super }}
-    <script src="{% static '' %}"></script>
+  {{ block.super }}
+  <script src="{% static 'rent/chucnangthuexe/js/today.js' %}"></script>
+  <script type="text/javascript">
+		jQuery(document).ready(function($) {
+			var list_moto = $('.s-list-moto .list-moto');
+			if(list_moto.children('.moto-item').length > 4){
+				list_moto.slick({
+					infinite: true,
+					arrows:false,
+					dots:true,
+					slidesToShow: 3,
+					slidesToScroll: 1
+				});
+			}
+		});
+	</script>
+  <script>
+    $(document).ready(function(){
+      $('.save-nhanxe-to-session').on('click', function(e){
+          e.preventDefault();
+  
+          // Send an AJAX request to the server
+          var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+          $.ajax({
+              url: "{% url 'rent:sua-thong-tin-nhan-xe' %}", // Replace with the actual URL
+              method: 'POST',
+              data: {
+                'csrfmiddlewaretoken': csrftoken,
+                'order_day': $('#today').val(),
+                'pickup_location': $('#pickup_location').val(),
+              },
+              success: function(response) {
+                console.log('Sửa thông tin nhận xe:');
+                console.log(response);
+              }
+          });
+      });
+    });
+    $(document).ready(function(){
+      $('.save-traxe-to-session').on('click', function(e){
+          e.preventDefault();
+  
+          // Send an AJAX request to the server
+          var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+          $.ajax({
+              url: "{% url 'rent:sua-thong-tin-tra-xe' %}", // Replace with the actual URL
+              method: 'POST',
+              data: {
+                'csrfmiddlewaretoken': csrftoken,
+                'return_day': $('#return-day').val(),
+                'return_location': $('#return_location').val(),
+              },
+              success: function(response) {
+                console.log('Sửa thông tin trả xe');
+                console.log(response);
+              }
+          });
+      });
+    });
+  </script>
 {% endblock %}

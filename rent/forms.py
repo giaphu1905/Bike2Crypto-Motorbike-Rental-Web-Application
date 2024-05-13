@@ -1,6 +1,7 @@
 from user.models import UserProfile
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from .models import Payment
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Username', 'class': 'input100'}))
@@ -27,3 +28,5 @@ class SignUpForm(UserCreationForm):
         if UserProfile.objects.filter(username=username).exists():
             raise forms.ValidationError('Username này đã được sử dụng!!!')
         return cleaned_data
+    
+

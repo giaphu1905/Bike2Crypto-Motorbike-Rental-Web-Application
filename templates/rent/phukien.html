@@ -1,0 +1,327 @@
+{% extends 'home_base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+  Đặt xe tại {{ rent_info.pickup_location }}
+{% endblock %}
+
+{% block mycss %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/phukien.css' %}" />
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/popup.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="page-cover location-page-cover">
+    <div class="overlay-color"></div>
+    <div class="container">
+      <h1 class="page-title text-center">Đặt xe tại {{ rent_info.pickup_location }}</h1>
+    </div>
+  </div>
+  <p id="breadcrumbs">
+    <span>
+      <span><a href="/home">Trang chủ</a></span> »
+      <span class="breadcrumb_last" aria-current="page"><strong>Đặt xe tại {{ rent_info.pickup_location }}</strong></span>
+    </span>
+  </p>
+  <form method="POST" action="" accept-charset="UTF-8" id="save-reservation-form" class="prevent-submit-by-enter loading-bar-on-submit">
+    {% csrf_token %}  
+    {% include 'rent/sixstepline.html' %}
+
+    <div class="osections section-edit section-visible">
+      <div class="appform container-fluid">
+        <div class="row flex-wrap">
+          <div class="col-md-9 col-sm-9 col-xs-12 car-rental-main-container">
+            <div class="box box-open">
+              <div class="box-summary">
+                <h2>Dịch vụ</h2>
+              </div>
+              <div class="box-fields">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12">
+                    <img class="image-lazy-load img-responsive" src="" style="display: block;" />
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <h4>Xe đi đường dài</h4>
+                    <div class="">
+                      <p>Khoản phí này sẽ&nbsp;áp dụng&nbsp;cho các khách hàng sử dụng xe một trong trường hợp sau:</p>
+                      <ul>
+                        <li>Khách thuê xe đi&nbsp;đường dài, ra khỏi nội thành Sài Gòn</li>
+                        <li>Xe đi phượt&nbsp;các tỉnh.</li>
+                      </ul>
+                      <p>
+                        Lưu ý: Đối với các khách&nbsp;đi đường dài chưa lựa chọn&nbsp;gói phát sinh này, khi trả xe ABC sẽ thu bổ sung của khách. Để biết thêm chi tiết&nbsp;vui lòng liên hệ <a href="tel:0123456789">0123456789</a> để được giải đáp.
+                      </p>
+                      <p>&nbsp;</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <input name="xe_di_duong_dai" class="additional-charges-checkbox" aria-label="Hộp Kiểm" id="di_duong_dai_check" type="checkbox" value="50000" />
+                        <div style="padding-top: 3px;display: inline-block;font-weight: bold;">
+                          ₫50.000
+                          <span class="car-rental-reservations-charge-type car-rental-reservations-charge-type-daily car-rental-reservations-charge-type-13-id">/Hằng Ngày</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box box-open">
+              <div class="box-summary">
+                <h2>Bảo hiểm hỏng hóc sửa chữa xe</h2>
+              </div>
+
+              <div class="box-fields">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12 box-child">
+                    <img class="image-lazy-load img-responsive" src="" style="display: block;" />
+                  </div>
+
+                  <div class="col-md-6 col-sm-5 col-xs-12 reset-lists-style">
+                    {% if xe_thue.loai_xe == 'Yamaha Sirius 110cc' or xe_thue.loai_xe == 'Honda Vision 110cc' %}
+                      <h4>Bảo hiểm hỏng hóc 30k/ngày</h4>
+                    {% elif xe_thue.loai_xe == 'Honda Air Blade 125cc' or xe_thue.loai_xe == 'Honda WinnerX 150cc' %}
+                      <h4>Bảo hiểm hỏng hóc 50k/ngày</h4>
+                    {% endif %}
+                    <div class="car-rental-additional-charge-short-description">
+                      {% if xe_thue.loai_xe == 'Yamaha Sirius 110cc' or xe_thue.loai_xe == 'Honda Vision 110cc' %}
+                        <p>Phí bảo hiểm 30.000đ/ngày chỉ áp dụng đối với dòng xe Yamaha Sirius và Honda Vision</p>
+                      {% elif xe_thue.loai_xe == 'Honda Air Blade 125cc' or xe_thue.loai_xe  == 'Honda WinnerX 150cc' %}
+                        <p>Phí bảo hiểm 50.000đ/ngày chỉ áp dụng đối với dòng xe Honda Airblade 125cc và Winner 150cc</p>
+                      {% endif %}
+                      <p>Khoản phí này sẽ áp dụngcho các khách hàng sử dụng xe một trong trường hợp sau:</p>
+                      <ul>
+                        <li>Gói bảo hiểm áp dụng cho trường hợp khách đi chuyển gặp bất kỳ vấn đề gì hư hỏng liên quan đến xe máy đang thuê, sẽ được chi trả 100% số tiền sửa chữa bao gồm cả vấn đề va chạm, tai nạn hư hại về xe.</li>
+                      </ul>
+                      <p>
+                        Lưu ý: Đối với các khách đi đường dài nên lựa chọn gói phát sinh này để an toàn và yên tâm trong quá trình đi phượt,...&nbsp;Để biết thêm chi tiết&nbsp;vui lòng liên hệ <a href="tel:0338023344">0123.45.33.44</a>&nbsp; để được giải đáp.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 col-sm-4 col-xs-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        {% if xe_thue.loai_xe == 'Yamaha Sirius 110cc' or xe_thue.loai_xe == 'Honda Vision 110cc' %}
+                          <input name="phi_bao_hiem" class="additional-charges-checkbox" id="bao_hiem_check" title="Bảo hiểm" type="checkbox" value="30000">
+                          <div id="gia-bao-hiem" style="padding-top: 3px;display: inline-block;font-weight: bold;">
+                              ₫30.000
+                          {% elif xe_thue.loai_xe == 'Honda Air Blade 125cc' or xe_thue.loai_xe == 'Honda WinnerX 150cc' %}
+                            <input name="phi_bao_hiem" class="additional-charges-checkbox" id="bao_hiem_check" title="Bảo hiểm" type="checkbox" value="50000">
+                            <div id="gia-bao-hiem" style="padding-top: 3px;display: inline-block;font-weight: bold;">    
+                              ₫50.000
+                          {% endif %}
+                            <span class="car-rental-reservations-charge-type car-rental-reservations-charge-type-daily car-rental-reservations-charge-type-14-id">/Hằng Ngày</span>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr style="margin: 0 0 10px;" />
+              </div>
+            </div>
+
+            <div class="box box-open">
+              <div class="box-summary">
+                <h2>Phụ kiện đi kèm</h2>
+              </div>
+              <div class="box-fields">
+                {% for phukien in ds_phukien %}
+                  <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-12 box-child">
+                      <img class="image-lazy-load img-responsive" src="" style="display: block;" />
+                    </div>
+
+                    <div class="col-md-6 col-sm-5 col-xs-12 reset-lists-style">
+                      <h4 id="ten-phukien-{{ phukien.id }}">
+                        {{ phukien.ten }}
+                      </h4>
+                      <div class="car-rental-additional-charge-short-description">
+                        <p>{{ phukien.mota }}</p>
+                      </div>
+                    </div>
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                      <div class="panel panel-success">
+                        <div class="panel-heading d-flex">
+                          {% if phukien.gia == 0 %}
+                            <input name="pk_{{phukien.ten}}" id="number-{{phukien.id}}" class="additional-charges-checkbox" aria-label="Hộp Kiểm" type="checkbox" value="1">
+                          {% else %}
+                          <select name="pk_{{phukien.ten}}" id="number-{{phukien.id}}" style="padding: 0; height: auto;width: auto;" class="additional-charges-dropdown">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                          </select>
+                          {% endif %}
+                          {% if phukien.gia == 0 %}
+                            <div id="gia-free" class="d-flex justify-content-center" style="padding-top: 3px;display: inline-block;font-weight: bold;">
+                              Miễn phí
+                          {% else %}  
+                            <div id="gia-not-free-{{ phukien.id }}" style="padding-top: 3px;display: inline-block;font-weight: bold;">
+                              ₫{{ phukien.gia|intcomma }}<span>/Hằng Ngày</span>
+                          {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <hr style="margin: 0 0 10px;" /> 
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="finalbuttons">
+              <button type="submit" class="btn btn-primary" name="action-next" id="next-step-save-contact">
+                Bước tiếp theo
+              </button>
+            </div>
+          </div>
+          {% include 'rent/tomluoc.html' %}
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}
+
+{% block myjs %}
+  {{ block.super }}
+  <script>
+    function capNhatTongTienThue() {
+      var tong_tien_thue = 0;
+      $(".car-rental-base-price-overview, #phi-xe-duong-dai, #phi-bao-hiem, #phu-kien-di-kem").not('.hide').each(function(){
+          var gia = $(this).find('.pull-right.normal-font').text();
+          gia = parseInt(gia.replace(/[^0-9]/g, ''));
+          if (!isNaN(gia)) {
+              tong_tien_thue += gia;
+          }
+      });
+      $('#tong-cong-tien-thue').text(tong_tien_thue.toLocaleString('vi-VN'));
+    }
+
+    $(document).ready(function(){
+        $("#di_duong_dai_check").change(function(){
+            if(this.checked){
+              var phi_xe_duongdai = 50000 * {{ rent_info.thoigian_thue }};
+              var formattedPhiXeDuongDai = phi_xe_duongdai.toLocaleString('vi-VN');
+              $('#phi-xe-duong-dai .pull-right.normal-font').text('₫' + formattedPhiXeDuongDai);
+              $('#phi-xe-duong-dai').removeClass('hide');
+            } else {
+              $('#phi-xe-duong-dai').addClass('hide');
+            }
+            capNhatTongTienThue();
+        });
+    });
+
+    $(document).ready(function(){
+      $("#bao_hiem_check").change(function(){
+          if(this.checked){
+              var phi_bao_hiem = parseInt($("#gia-bao-hiem").text().replace(/[^0-9]/g, '')) * {{ rent_info.thoigian_thue }};
+              var formattedPhiBaoHiem = phi_bao_hiem.toLocaleString('vi-VN');
+              $('#phi-bao-hiem .pull-right.normal-font').text('₫' + formattedPhiBaoHiem);
+              $('#phi-bao-hiem').removeClass('hide');
+          } else {
+              $('#phi-bao-hiem').addClass('hide');
+          }
+          capNhatTongTienThue();
+      });
+    });
+
+    $(document).ready(function(){
+      $('select[id^="number-"]').change(function(){
+          var id = $(this).attr('id').split('-')[1];
+          var gia_phukien_text = $('#gia-not-free-' + id).text();
+          var gia_phukien = parseInt(gia_phukien_text.replace(/[^0-9]/g, ''));
+  
+          // Remove the old accessory of the same type
+          $("#phukien-" + id).remove();
+  
+          if ($(this).val() != '0') {
+              total = gia_phukien * $(this).val() * {{ rent_info.thoigian_thue }};
+              var formattedTotal = total.toLocaleString('vi-VN');
+              var html = `
+              <li id="phukien-${id}">
+                  <div class="limit-text-by-wrapping-it">
+                      ${$(this).val()}x
+                      ${$('#ten-phukien-' + id).text()}:
+                  </div>
+                  <div class="pull-right normal-font" style="white-space: nowrap;">₫${formattedTotal}</div>
+              </li>`;
+              $("#phu-kien-di-kem .col-md-12 .list-without-styles").append(html);
+              // Show the div if it's not already visible
+              if ($('#phu-kien-di-kem').hasClass('hide')) {
+                  $('#phu-kien-di-kem').removeClass('hide');
+              }
+          } else {
+              // If there are no more accessories, hide the div
+              if ($('#phu-kien-di-kem').find('.list-without-styles li').length == 0) {
+                  $('#phu-kien-di-kem').addClass('hide');
+              }
+          }
+          capNhatTongTienThue();
+      });
+    });
+
+    $(document).ready(function(){
+      $('input[id^="number-"]').change(function(){
+          var id = $(this).attr('id').split('-')[1];
+          var gia_phukien = 0;
+  
+          if(this.checked){ 
+              var html = `
+              <li id="phukien-${id}">
+                  <div class="limit-text-by-wrapping-it">
+                      ${$(this).val()}x
+                      ${$('#ten-phukien-' + id).text()}:
+                  </div>
+                  <div class="pull-right normal-font" style="white-space: nowrap;">₫${gia_phukien}</div>
+              </li>`;
+              $("#phu-kien-di-kem .col-md-12 .list-without-styles").append(html);
+              if ($('#phu-kien-di-kem').hasClass('hide')) {
+                $('#phu-kien-di-kem').removeClass('hide');
+            }
+          } else {
+              // Remove the added HTML when the checkbox is unchecked
+              $("#phukien-" + id).remove();
+              if ($('#phu-kien-di-kem').find('.list-without-styles li').length == 0) {
+                $('#phu-kien-di-kem').addClass('hide');
+              }
+          }
+          capNhatTongTienThue();
+      });
+    });
+
+    $(document).ready(function(){
+      capNhatTongTienThue()
+    });
+
+    function capNhatTongTienThue() {
+      var tong_tien_thue = 0;
+      $(".car-rental-base-price-overview, #phi-xe-duong-dai, #phi-bao-hiem").not('.hide').each(function(){
+          var gia = $(this).find('.pull-right.normal-font').text();
+          gia = parseInt(gia.replace(/[^0-9]/g, ''));
+          if (!isNaN(gia)) {
+              tong_tien_thue += gia;
+          }
+      });
+  
+      $("#phu-kien-di-kem").not('.hide').find('.list-without-styles li').each(function(){
+          var gia = $(this).find('.pull-right.normal-font').text();
+          gia = parseInt(gia.replace(/[^0-9]/g, ''));
+          if (!isNaN(gia)) {
+              tong_tien_thue += gia;
+          }
+      });
+  
+      $('#tong-cong-tien-thue').text(tong_tien_thue.toLocaleString('vi-VN'));
+    }
+    
+    
+    
+    </script>
+{% endblock %}

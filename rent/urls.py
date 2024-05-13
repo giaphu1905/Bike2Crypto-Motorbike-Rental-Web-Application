@@ -12,9 +12,18 @@ urlpatterns = [
     path("", RedirectView.as_view(url='home/', permanent=True)),
     path('logout/', views.logout_view, name='logout'),
     path('signup/', views.Signup.as_view(), name='signup'),
-    path('thue-xe-tai-/<int:pk>', views.ThueXeView.as_view(), name='thue-xe'),
+    path('thue-xe-tai-<str:pickup_location>', views.ThueXeView.as_view(), name='thue-xe'),
+    path('thue-xe-tai-<str:pickup_location>/phukien-<int:vehicle_id>', views.PhuKienView.as_view(), name='phu-kien'),
+    path('thue-xe-tai-<str:pickup_location>/phukien-<int:vehicle_id>/contact', views.ContactView.as_view(), name='contact'),
+    path('thue-xe-tai-<str:pickup_location>/phukien-<int:vehicle_id>/contact/confirm', views.ConfirmView.as_view(), name='confirm'),
+    path('thue-xe-tai-<str:pickup_location>/phukien-<int:vehicle_id>/contact/confirm/success-<int:order_id>', views.ThanhCongView.as_view(), name='thanh-cong'),
 
+    path('thanh-toan-order<int:order_id>-by-payment<int:payment_id>', views.PaymentView.as_view(), name='thanh-toan'),
+    path('thanh-toan-order<int:order_id>-by-payment<int:payment_id>/success', views.ThanhCongPaymentView.as_view(), name='thanh-cong-payment'),
     path('rent/api/xe_may/', views.XeMayAPI.as_view(), name='xe_may_api'),
+
+    path('sua-thong-tin-nhan-xe/', views.SuaThongTinNhanXe, name='sua-thong-tin-nhan-xe'),
+    path('sua-thong-tin-tra-xe/', views.SuaThongTinTraXe, name='sua-thong-tin-tra-xe'),
 ]
 
 

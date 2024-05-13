@@ -1,0 +1,189 @@
+{% extends 'home_base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+  Đặt xe tại {{ rent_info.pickup_location }}
+{% endblock %}
+
+{% block mycss %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'payment/payment.css' %}" />
+  <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="page-cover location-page-cover">
+    <div class="overlay-color"></div>
+    <div class="container">
+      <h1 class="page-title text-center">Đặt xe tại {{ rent_info.pickup_location }}</h1>
+    </div>
+  </div>
+  <p id="breadcrumbs">
+    <span>
+      <span><a href="/home">Trang chủ</a></span> »
+      <span class="breadcrumb_last" aria-current="page"><strong>Đặt xe tại {{ rent_info.pickup_location }}</strong></span>
+    </span>
+  </p>
+  <div class="d-flex">
+    <h2 style="padding-left: 60px;"> Thanh toán</h2>  
+    <section id="main">
+      <div id="page" class="container">
+        <div id="public_pagehead" class="row"></div>
+          <div id="mainpage" class="row ">
+            <div class="container-fluid">
+              <div class="paymentcard">
+                <div class="product-container">
+                  <div class="image">
+                    <img src="{% static 'images/xemay/airblade.png' %}" alt="International-Women-s-Day-Facebook-Post" border="0" />
+                  </div>
+                  <div class="details">
+                    <h1 class="cost">đ{{rent_info.tong_tien_thue|intcomma}}</h1>
+                    <h3 class="title">{{loai_xe_thue}}</h3>
+                  </div>
+                </div>
+                <div class="card-container">
+                  <h2 class="title">Thanh toán bằng ETH</h2>
+                  <div class="mastercard">
+                    <img class="logo" src="{% static 'images/metamask.png' %}" alt="" />
+                    <hr />
+                    <button id="MetaMaskconnectButton" class="button-56">Kết nối ví MetaMask</button>
+
+                  </div>
+                  <div class="card-details">
+                    <div class="card-number field">
+                      <h4 for="cn">Địa chỉ ví</h4>
+                      <div id="walletID">Địa chỉ của bạn chưa được kết nối.</div>
+                      {% csrf_token %}
+                      <input type="hidden" name="payment_address" value="">
+                    </div>
+
+                    <div class="card-name field">
+                      <h4 for="cna">ETH cần thanh toán</h4>
+                      <input type="hidden" name="payment_amount" value="{{ payment.amount }}">
+                      <p name="payment_amount">{{ payment.amount }} ETH</p>
+                    </div>
+                  </div>
+                  <button id="button-payment" class="sendEthButton purchase-button" data-content="Thanh toán ETH" style="height: 100px"></button>
+                </div>
+              </div>
+              <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="cookiesContent" id="cookiesPopup">
+                      <button class="close" data-bs-dismiss="modal" aria-label="Close" onclick="location.href='{% url "rent:thanh-cong-payment" order_id=order_id payment_id=payment.id %}'">✖</button>
+                      <img src="{% static 'images/metamask.png' %}" alt="metamask-img" />
+                      <p>Bạn đã thanh toán thành công {{payment.amount}} ETH cho địa chỉ: 0xad713ad7d094C8d1F9A91FFBFBA43612f96ca2Ea</p>
+                      <button class="accept" data-bs-dismiss="modal" onclick="location.href='{% url "rent:thanh-cong-payment" order_id=order_id payment_id=payment.id %}'">OK!</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}
+
+{% block myjs %}
+  {{ block.super }}
+  <script type="text/javascript">
+    const connectButton = document.getElementById("MetaMaskconnectButton");
+    const walletID = document.getElementById("walletID");
+    const payment_address = document.querySelector("input[name='payment_address']");
+    let account;
+
+    if (typeof window.ethereum !== "undefined") {
+        ethereum
+          .request({ method: "eth_requestAccounts" })
+          .then((accounts) => {
+            account = accounts[0]
+
+            walletID.innerHTML = `Wallet connected: ${account}`;
+            connectButton.innerHTML = "Đã kết nối";
+            payment_address.value = account;
+          })
+    } else {
+          window.open("https://metamask.io/download/", "_blank");
+    }
+  
+  let provider = new Web3.providers.HttpProvider("http://localhost:7545");
+  let web3 = new Web3(provider);
+  const sendEthButton = document.querySelector(".sendEthButton");
+  const amount = parseFloat(document.querySelector("input[name='payment_amount']").value).toFixed(18);
+  let csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+  // Send Ethereum to an address.
+  sendEthButton.addEventListener("click", () => {
+    window.ethereum // Or window.ethereum if you don't support EIP-6963.
+      .request({
+        method: "eth_sendTransaction",
+        // The following sends an EIP-1559 transaction. Legacy transactions are also supported.
+        params: [
+          {
+            // The user's active address.
+            from: account,
+            // Required except during contract publications.
+            to: "0xad713ad7d094C8d1F9A91FFBFBA43612f96ca2Ea",
+            value: "0x" + Web3.utils.toBN(Web3.utils.toWei(amount, "ether")).toString(16),
+            gasLimit: '0x5028',
+            maxPriorityFeePerGas: '0x3b9aca00',
+            maxFeePerGas: '0x2540be400',
+          },
+        ],
+      })
+      .then((txHash) => {
+        setWaitingForTx(true);
+        web3.eth.getTransactionReceipt(txHash).then((receipt) => {
+          setWaitingForTx(false);
+          showSuccessModal();
+          console.log("Giao dịch thành công!");
+          // Send AJAX request to save payment
+          $.ajax({
+            url: '{% url "rent:thanh-toan" order_id=order_id payment_id=payment.id %}', // Replace with the actual URL for PaymentView
+            method: 'POST',
+            data: {
+              'address-crypto': account,
+              'csrfmiddlewaretoken': csrfToken, // Replace with the actual CSRF token
+            },
+            success: function(response) {
+              console.log(response);
+            }
+          });
+          }).catch((error) => {
+            setWaitingForTx(false);
+            console.log("handleClick Error: ", error)
+            console.log("Giao dịch thất bại!")
+            })
+      }).catch((error) => {
+          setWaitingForTx(false);
+          console.log("handleClick Error: ", error)
+          if (error.code === -32603) {
+            console.log(err.data.message)
+          }
+        })
+  });
+
+  function setWaitingForTx(bool) {
+    if (bool) {
+        // Show a loading screen
+        let buttonPayment = document.getElementById('button-payment');
+        buttonPayment.setAttribute('data-content', 'Đang thanh toán...');
+        // Disable the button
+        buttonPayment.disabled = true;
+        buttonPayment.classList.add('disabled-button');
+    } else {
+        // Hide the loading screen
+        let buttonPayment = document.getElementById('button-payment');
+        buttonPayment.setAttribute('data-content', 'Thanh toán ETH');
+        // Enable the button
+        buttonPayment.disabled = false;
+    }
+  }
+
+  showSuccessModal = () => {
+    $('#successModal').modal('show');
+  }
+  </script>
+{% endblock %}

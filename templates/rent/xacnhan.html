@@ -1,0 +1,182 @@
+{% extends 'home_base.html' %}
+{% load static %}
+{% block title %}
+  Đặt xe tại {{ rent_info.pickup_location }}
+{% endblock %}
+
+{% block mycss %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'rent/contact/contact.css' %}" />
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/popup.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="page-cover location-page-cover">
+    <div class="overlay-color"></div>
+    <div class="container">
+      <h1 class="page-title text-center">Đặt xe tại {{ rent_info.pickup_location }}</h1>
+    </div>
+  </div>
+  <p id="breadcrumbs">
+    <span>
+      <span><a href="/home">Trang chủ</a></span> »
+      <span class="breadcrumb_last" aria-current="page"><strong>Đặt xe tại {{ rent_info.pickup_location }}</strong></span>
+    </span>
+  </p>
+  <form method="POST" action="" accept-charset="UTF-8" id="save-reservation-form" class="prevent-submit-by-enter loading-bar-on-submit">
+    {% csrf_token %}
+
+    {% include 'rent/sixstepline.html' %}
+
+    <div class="osections section-edit section-visible">
+      <div class="appform container-fluid">
+        <div class="row flex-wrap">
+          <div class="col-md-9 col-sm-9 col-xs-12 car-rental-main-container">
+            <div class="box box-open">
+              <div class="box-summary">
+                <h2 class="text-right">Ngày/Địa điểm nhận,trả xe</h2>
+              </div>
+              <div class="box-fields">
+                <div class="row d-flex justify-content-around">
+                    <div class="form-group col-md-3 col-sm-3 col-xs-6">
+                        <div class="control-label">Ngày nhận xe</div>
+                        <div class="control-value" name="order_day">
+                            {{ rent_info.order_day }}            
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 col-sm-3 col-xs-6">
+                        <div class="control-label">Ngày trả xe</div>
+                        <div class="control-value" name="return_day">
+                            {{ rent_info.return_day }} 
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-around">
+                    <div class="form-group col-md-3 col-sm-3 col-xs-6">
+                        <div class="control-label">Địa điểm nhận xe</div>
+                        <div class="control-value" name="address">
+                            {{ rent_info.address }}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 col-sm-3 col-xs-6">
+                        <div class="control-label">Địa điểm trả xe</div>
+                        <div class="control-value" id="">
+                            {{ dia_diem_tra_xe.dia_chi_cu_the }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="box box-open car-rental-selected-vehicle-class-step-5">
+              <div class="box-summary">
+                  <h2>Đã Chọn Xe máy</h2>
+              </div>
+              <div class="box-fields">
+                <div class="row">
+                  <div class="col-md-3 col-sm-3 col-xs-12 car-rental-step-2-image-column">
+                    <img class="image-lazy-load img-responsive" src="" style="display: block;">
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12 car-rental-step-2-description-column">
+                    <h4 class="no-margin-top">{{ loai_xe_thue }}</h4>
+                    <p>Lưu ý: Màu sắc có thể khác nhau&nbsp;nhưng&nbsp;kiểu dáng xe giống như&nbsp;hình&nbsp;minh họa.</p>
+                  </div>
+                  <div class="col-md-3 col-sm-3 col-xs-12 text-right car-rental-step-2-price-column no-selectable">
+                    <div class="panel panel-default no-margin-bottom text-right">
+                      <div class="panel-heading" style="padding-top: 1px;padding-left: 10px;padding-right: 10px;">
+                        <div class="full-width car-rental-vehicle-class-rack-rate-details car-rental-vehicle-class-rack-rate-details-2">
+                          <h2 style="font-size: 20px;">₫{{ gia_thue }}<small class="day-label">/Ngày</small></h2>
+                        </div>
+                        <div class="full-width car-rental-vehicle-class-one-day-price-details car-rental-vehicle-class-one-day-price-details-2">
+                          <h5 style="font-size: 13px;">₫400.000 cho 2 Ngày</h5>
+                        </div>
+                        <h6>không bao gồm thuế và bảo hiểm</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>      
+              </div>
+            </div>
+            <div class="box box-open">
+              <div class="box-summary">
+                <h2 class="text-right">Thông tin khách hàng</h2>
+              </div>
+              <div class="box-fields">
+                <div class="col-md-9 personal-info">
+                  <div class="form-horizontal">
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-6 control-label">Họ tên:</label>
+                      <div class="col-lg-8">
+                        {{ user_login.fullname }}
+                      </div>
+                    </div>
+                    <div class="form-group pt-2">
+                      <label class="col-md-6 col-sm-6 control-label">Ngày sinh:</label>
+                      <div class="col-lg-8">
+                        {{ user_login.date_of_birth }}
+                      </div>
+                    </div>
+                    <div class="form-group pt-2">
+                      <label class="col-md-6 col-sm-6 control-label">Giới tính:</label>
+                      <div class="col-lg-8">
+                        {{ user_login.gender }}
+                      </div>
+                    </div>
+                    <div class="form-group pt-2">
+                      <label class="col-md-6 col-sm-6 control-label">Số điện thoại:</label>
+                      <div class="col-lg-8">
+                        {{ user_login.phone_number }}
+                      </div>
+                    </div>
+                    <div class="form-group pt-2">
+                      <div id="label-addr" class="col-md-6 col-sm-6"><label class="control-label"> Nhận xe tại địa chỉ:</label>
+                        <span> {{ rent_info.address }} </span>
+                      </div>
+                    </div>
+                    <div class="form-group  pt-4">
+                      <label for="{{ form.banglai.id_for_label }}">Giấy phép lái xe: </label>
+                      {% if user_login.banglai %}
+                        <img src="{{ user_login.banglai.url }}" class="profile-pic" alt="bang-lai" id="banglai-preview" style="width:300px; height:180px" >
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="finalbuttons">
+
+                <div class="cfield cfield-checkbox has-error car-rental-terms-and-conditions-wrapper">
+                  <div class="cfield-content">
+                    <div class="form-group" style="margin-top: 10px;">
+                      <label class="d-flex checkbox-inline">
+                        <input aria-label="Hộp Kiểm" name="terms_and_conditions" type="checkbox">
+                        <p class="mt-3">Điều khoản&nbsp;dịch vụ thuê xe.</p>
+                      </label>
+                    </div>
+                    <span class="error" style="display: none;color: red;">Các điều khoản và điều kiện phải được chấp nhận.</span>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary bg-yellow" name="action-next">Xác nhận thuê xe</button>
+
+              
+            </div>
+          </div>  
+          {% include 'rent/tomluoc.html' with page_name='contact_or_xacnhan' %}      
+      </div>
+    </div>
+  </form>
+{% endblock %}
+
+{% block myjs %}
+  {{ block.super }}
+  <script>
+    $(document).ready(function(){
+      $("form").submit(function(e){
+        if (!$('input[name="terms_and_conditions"]').is(':checked')) {
+          e.preventDefault();
+          $(".error").show();
+        }
+      });
+    });
+  </script>
+{% endblock %}

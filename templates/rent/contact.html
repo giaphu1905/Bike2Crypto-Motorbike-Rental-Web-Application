@@ -1,0 +1,124 @@
+{% extends 'home_base.html' %}
+{% load static %}
+{% block title %}
+  Đặt xe tại {{ rent_info.pickup_location }}
+{% endblock %}
+
+{% block mycss %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'rent/contact/contact.css' %}" />
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/popup.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="page-cover location-page-cover">
+    <div class="overlay-color"></div>
+    <div class="container">
+      <h1 class="page-title text-center">Đặt xe tại {{ rent_info.pickup_location }}</h1>
+    </div>
+  </div>
+  <p id="breadcrumbs">
+    <span>
+      <span><a href="/home">Trang chủ</a></span> »
+      <span class="breadcrumb_last" aria-current="page"><strong>Đặt xe tại {{ rent_info.pickup_location }}</strong></span>
+    </span>
+  </p>
+  <form method="POST" action="" accept-charset="UTF-8" id="save-reservation-form" class="prevent-submit-by-enter loading-bar-on-submit">
+    {% csrf_token %}
+    {% include 'rent/sixstepline.html' %}
+    <div class="osections section-edit section-visible">
+      <div class="appform container-fluid">
+        <div class="row flex-wrap">
+          <div class="col-md-9 col-sm-9 col-xs-12 car-rental-main-container">
+            <div class="box box-open">
+              <div class="box-summary">
+                <h2 class="text-right">Thông tin khách hàng</h2>
+              </div>
+              <div class="box-fields">
+                <div class="col-md-9 personal-info">
+                  <form method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+                    <div class="form-group">
+                      <label class="col-md-6 col-sm-6 control-label">Họ tên:</label>
+                      <div class="col-lg-8">
+                        {{ form.fullname }}
+                      </div>
+                    </div>
+                    <div class="form-group pt-2">
+                      <label class="col-md-6 col-sm-6 control-label">Ngày sinh:</label>
+                      <div class="col-lg-8">
+                        {{ form.date_of_birth }}
+                      </div>
+                    </div>
+                    <div class="form-group pt-2">
+                      <label class="col-md-6 col-sm-6 control-label">Giới tính:</label>
+                      <div class="col-lg-8">
+                        {{ form.gender }}
+                      </div>
+                    </div>
+                    <div class="form-group pt-2">
+                      <label class="col-md-6 col-sm-6 control-label">Số điện thoại:</label>
+                      <div class="col-lg-8">
+                        {{ form.phone_number }}
+                      </div>
+                    </div>
+                    <div class="form-group  pt-2">
+                      <div id="label-addr" class="col-md-6 col-sm-6"><label class="control-label"> Nhận xe tại địa chỉ shop:</label>
+                        <span> {{ dia_diem.dia_chi_cu_the }} </span>
+                      </div>
+                      <div class="d-flex checkbox-wrapper-19">
+                        <input type="checkbox" id="cbtest-19" name="cbtest-19" />
+                        <label for="cbtest-19" class="check-box"></label>
+                        <h4 class="checkbox-label">Nhận xe tại địa chỉ của bạn</h4>
+                      </div>
+                      <div class="col-lg-8">
+                        {{ form.address }}
+                      </div>
+                    </div>
+                    <div class="form-group  pt-4">
+                      <label for="{{ form.banglai.id_for_label }}">Giấy phép lái xe: </label>
+                      {% if user_login.banglai %}
+                          <img src="{{ user_login.banglai.url }}" class="profile-pic" alt="bang-lai" id="banglai-preview" style="width:300px; height:180px" >
+                      {% endif %}
+                      <input type="file" id="{{ form.banglai.id_for_label }}" name="banglai" onchange="previewAvatar(event)">
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              
+            </div>
+            <div class="finalbuttons">
+              <button type="submit" class="btn btn-primary" name="action-next" value="next" id="next-step-save-contact">Bước tiếp theo</button>
+            </div>
+          </div>
+          {% include 'rent/tomluoc.html' with page_name='contact_or_xacnhan' %}
+        </div>
+      </div>
+    </div>
+  </form>
+{% endblock %}
+
+{% block myjs %}
+  {{ block.super }}
+  <script>
+    $(document).ready(function(){
+      $('#cbtest-19').change(function(){
+        if(this.checked)
+          $('#label-addr').css('opacity', '0.2');
+        else
+          $('#label-addr').css('opacity', '1');
+      });
+    });
+
+    function previewAvatar(event) {
+			var input = event.target;
+			var reader = new FileReader();
+			reader.onload = function(){
+			  var img = document.getElementById("banglai-preview");
+			  img.src = reader.result;
+			};
+			reader.readAsDataURL(input.files[0]);
+		}
+    </script>
+{% endblock %}

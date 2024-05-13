@@ -1,0 +1,232 @@
+{% load humanize %}
+{% load static %}
+<div class="col-md-3 col-sm-3 col-xs-12 car-rental-summary-container">
+  <div class="" data-top_spacing="">
+    <div class="box box-open" id="summary">
+      <div class="box-summary">
+        <h2 class="car-rental-reservation-summary-title">
+          Tóm lược
+        </h2>
+      </div>
+      <div class="box-fields">
+        <div class="row car-rental-overview">
+          <div class="col-md-12 car-rental-reservation-summary-status" style="padding: 0;">
+            <div class="control-label">
+              <span title="" class="label label-default">Báo giá</span>
+            </div>
+          </div>
+
+          <div class="col-md-12 car-rental-summary-pickup" style="padding: 0;">
+            <div class="control-label workflow-summary-title">
+              Thông tin nhận xe &nbsp;
+              <a class="car-rental-summary-edit-pick-up-date" href="#popup" data-url="" aria-label="Edit Pickup"><i class="fas fa-pencil-alt" title=""></i></a>
+            </div> {{ rent_info.order_day  }} <br/>
+            <span class="car-rental-summary-pick-up-location">Địa điểm: {{ dia_diem_nhan_xe.dia_chi_cu_the }}</span>           
+          </div>
+          <!-- Popup sửa thông tin nhận xe -->
+          <div class="popup" id="popup">
+            <div class="popup__content">
+              <h2 class="heading-secondary">Sửa thông tin nhận xe</h2>
+              <h4 class="heading-tertiary">Ngày nhận xe:</h4>
+              <p class="popup__text">
+                <input class="second-row-input form-control" id="today" type="date" name="order_day">
+              </p>
+              <h4 class="heading-tertiary">Địa điểm nhận xe:</h4>
+              <p class="popup__text">
+                <select id="pickup_location" class="selectpicker form-control" name="pickup_location">
+                  <option>Chọn điểm nhận xe</option> 
+                  {% for dia_diem in dia_diems %}
+                      <option>{{ dia_diem.ten }}</option>
+                  {% endfor %}
+                </select>
+              </p>
+              <a href="#" class="button">Close Popup</a>
+              <a href="" class="button save-nhanxe-to-session">Sửa thông tin</a>
+            </div>
+          </div>
+          <!-- End Popup sửa thông tin nhận xe -->
+          <script src="{% static 'rent/chucnangthuexe/js/today.js' %}"></script>
+          <div class="col-md-12 car-rental-summary-return" style="padding: 5px 0 0;">
+            <div class="control-label">
+              Thông tin trả xe &nbsp;
+              <a class="modal-open car-rental-summary-edit-return-date" href="#popup-tra" data-url="" aria-label="Edit Return"><i class="fas fa-pencil-alt" title=""></i></a>
+            </div> {{ rent_info.return_day  }} 
+            <br />
+            <span class="car-rental-summary-return-location">Địa điểm: {{ dia_diem_tra_xe.dia_chi_cu_the }}</span>
+            <br />
+          </div>
+          <!-- Popup sửa thông tin trả xe -->
+          <div class="popup" id="popup-tra">
+            <div class="popup__content">
+              <h2 class="heading-secondary">Sửa thông tin trả xe</h2>
+              <h4 class="heading-tertiary">Ngày trả xe:</h4>
+              <p class="popup__text">
+                <input class="second-row-input form-control" id="return-day" type="date" name="return_day">
+              </p>
+              <h4 class="heading-tertiary">Địa điểm trả xe:</h4>
+              <p class="popup__text">
+                <select id="return_location" class="selectpicker form-control" name="return_location">
+                  <option>Chọn điểm trả xe</option> 
+                  {% for dia_diem in dia_diems %}
+                      <option>{{ dia_diem.ten }}</option>
+                  {% endfor %}
+                </select>
+              </p>
+              <a href="#" class="button">Close Popup</a>
+              <a href="" class="button save-traxe-to-session">Sửa thông tin</a>
+            </div>
+          </div>
+          <!-- End Popup sửa thông tin trả xe -->
+        </div>
+
+        <div class="row car-rental-label-for-website">
+          <div class="col-md-12" style="padding: 0;">
+            <div class="control-label workflow-summary-title car-rental-summary-vehicle-class">
+              Loại xe:  {{ xe_thue.loai_xe }}
+            </div>
+          </div>
+        </div>
+
+        <div class="row car-rental-price-overview">
+          <div class="col-md-12" style="padding: 0;">
+            <div class="row car-rental-price">
+              <div class="col-xs-3 no-padding-right car-rental-summary-price-label">
+                1x Giá theo ngày:
+              </div>
+              <div id="price-per-day" class="col-xs-5 text-right car-rental-summary-price-unit">
+                ₫{{ xe_thue.gia|intcomma }}
+              </div>
+              <div id="total-price-xe" class="col-xs-4 text-right car-rental-summary-price-total">
+                ₫{{ rent_info.gia_thue_xemay|intcomma }}
+              </div>
+            </div>                                            
+          </div>
+        </div>
+        <hr style="margin-top: 3px;margin-bottom: 3px;">
+
+        <div class="row car-rental-base-price-overview">
+          <div class="col-md-12" style="padding: 0;">
+            <div class="row car-rental-price">
+              <div class="col-xs-3 no-padding-right car-rental-summary-price-label">
+              </div>
+              <div class="col-xs-5 text-right car-rental-summary-price-unit">
+              </div>
+              <div class="pull-right normal-font col-xs-4 text-right car-rental-summary-price-total">
+                ₫{{ rent_info.gia_thue_xemay|intcomma }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div id="phi-xe-duong-dai" class="row car-rental-additional-charges hide">
+          <div class="col-md-12" style="padding: 0;">
+            <div class="control-label workflow-summary-title">
+                Dịch vụ
+            </div>
+            <ul class="list-without-styles">
+              <li>
+                <div class="limit-text-by-wrapping-it" title="" data-original-title="Xe đi đường dài:">
+                  Xe đi đường dài:
+                </div>
+                <div class="pull-right normal-font" style="white-space: nowrap;">NAn</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="phi-bao-hiem" class="row car-rental-additional-charges hide">
+          <div class="col-md-12" style="padding: 0;">
+            <div class="control-label workflow-summary-title">
+              Bảo hiểm hỏng hóc sửa chữa xe
+            </div>
+            <ul class="list-without-styles">
+              <li>
+                <div class="limit-text-by-wrapping-it" title="" data-original-title="Xe đi đường dài:">
+                  Bảo hiểm hỏng hóc:
+                </div>
+                <div class="pull-right normal-font" style="white-space: nowrap;">Thay đổi giá</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div id="phu-kien-di-kem" class="row car-rental-additional-charges car-rental-additional-charges-category-2 hide">
+          <div class="col-md-12" style="padding: 0;">
+            <div class="control-label workflow-summary-title">
+                Phụ kiện đi kèm
+            </div>
+            <ul class="list-without-styles">
+            </ul>
+          </div>
+        </div>
+        {% if page_name == 'contact_or_xacnhan' %}
+          {% if rent_info.di_duong_dai and rent_info.di_duong_dai != 0 %}
+          <div class="row car-rental-additional-charges">
+            <div class="col-md-12" style="padding: 0;">
+              <div class="control-label workflow-summary-title">
+                  Dịch vụ
+              </div>
+              <ul class="list-without-styles">
+                <li>
+                  <div class="limit-text-by-wrapping-it" title="" data-original-title="Xe đi đường dài:">
+                    Xe đi đường dài:
+                  </div>
+                  <div class="pull-right normal-font" style="white-space: nowrap;">đ{{ rent_info.di_duong_dai|intcomma }}</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if rent_info.bao_hiem and rent_info.bao_hiem != 0 %}
+          <div class="row car-rental-additional-charges">
+            <div class="col-md-12" style="padding: 0;">
+              <div class="control-label workflow-summary-title">
+                Bảo hiểm hỏng hóc sửa chữa xe
+              </div>
+              <ul class="list-without-styles">
+                <li>
+                  <div class="limit-text-by-wrapping-it" title="" data-original-title="Xe đi đường dài:">
+                    Bảo hiểm hỏng hóc:
+                  </div>
+                  <div class="pull-right normal-font" style="white-space: nowrap;">đ{{rent_info.bao_hiem|intcomma}}</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {% endif %}
+          {% if rent_info.phu_kien_thue %}
+          <div class="row car-rental-additional-charges car-rental-additional-charges-category-2">
+            <div class="col-md-12" style="padding: 0;">
+              <div class="control-label workflow-summary-title">
+                  Phụ kiện đi kèm
+              </div>
+              <ul class="list-without-styles">
+                {% for item in rent_info.phu_kien_thue %}
+                <li>
+                  <div class="limit-text-by-wrapping-it">
+                      {{item.so_luong}}x
+                      {{item.ten}}:
+                  </div>
+                  <div class="pull-right normal-font" style="white-space: nowrap;">₫{{item.gia|intcomma}}</div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          {% endif %}
+        {% endif %}
+        <div class="row car-rental-total">
+          <div class="col-md-12" style="padding: 0;">
+            <div class="control-label workflow-summary-title">Tổng cộng</div>
+            <h2 class="car-rental-summary-total-price">
+              <div id="tong-cong-tien-thue" class="pull-right normal-font" style="white-space: nowrap;">đ{{rent_info.tong_tien_thue|intcomma}}</div>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <br />
+    <br />
+</div>
+

@@ -1,0 +1,47 @@
+<div class="row flex-wrap">
+  <div class="col-md-9 col-sm-9 col-xs-12 car-rental-main-container">
+    <div class="box box-open">
+      <div class="box-summary">
+        <h2>Xe máy có sẵn</h2>
+      </div>
+      <div class="box-fields">
+        {% for xemay in ds_xemay %}
+        <div class="row">
+          <div class="col-md-3 col-sm-3 col-xs-12">
+            <img class="image-lazy-load img-responsive" src="" style="display: block;" />
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <h4 class="no-margin-top">{{ xemay.loai_xe }}</h4>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-12 text-right selectable">
+            <!--<h3 class="no-margin-top car-rental-vehicle-class-recommended"><span class="label label-info display-block no-rounded-corners">Đề xuất</span></h3>-->
+            <div class="panel panel-default no-margin-bottom text-right">
+              <div class="panel-heading" style="padding-top: 1px;padding-left: 10px;padding-right: 10px;">
+                <div class="full-width car-rental-vehicle-class-rack-rate-details car-rental-vehicle-class-rack-rate-details-2">
+                  <h2 class="d-flex" style="font-size: 20px;">
+                    ₫<div id="price-per-day"> {{ xemay.gia }}</div>
+                    <small class="day-label">/Ngày</small>
+                  </h2>
+                </div>
+
+                <div class="full-width car-rental-vehicle-class-one-day-price-details car-rental-vehicle-class-one-day-price-details-2">
+                  <h5 class="d-flex" style="font-size: 13px;">₫ <div id="total-price"> </div>&nbsp;cho {{ rent_info.thoigian_thue }} ngày</h5>
+                </div>
+
+                <h6>không bao gồm thuế và bảo hiểm</h6>
+
+                <button type="submit" name="vehicle_id" value="{{ xemay.id }}" class="btn btn-success regular-white-space car-rental-vehicle-class-selection-button car-rental-vehicle-class-2">Thuê</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        {% empty %}
+            <p>Chưa có xe có sẵn tại địa điểm này.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% include 'rent/tomluoc.html' %}
+
+</div>

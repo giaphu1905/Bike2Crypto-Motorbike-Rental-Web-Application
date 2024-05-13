@@ -4,38 +4,18 @@
             <span>THUÊ XE MÁY TẠI</span>
         </h2>
         <div class="row">
-            <div class="col-sm-6 col-6 col-md-3 location-item">
-                <div class="inner">
-                    <a href="https://motogo.vn/ha-noi/" class="thumb">
-                        <img>                  
-                        <span class="heading-text">Hà Nội</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-6 col-6 col-md-3 location-item">
-                <div class="inner">
-                    <a href="https://motogo.vn/ha-giang-2/" class="thumb">
-                        <img >
-                        <span class="heading-text">Hà Giang</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-6 col-6 col-md-3 location-item">
-                <div class="inner">
-                    <a href="https://motogo.vn/ninh-binh/" class="thumb">
-                        <img > 
-                        <span class="heading-text">Ninh Bình</span>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-6 col-6 col-md-3 location-item">
-                <div class="inner">
-                    <a href="https://motogo.vn/ho-chinh-minh/" class="thumb">
-                        <img>
-                        <span class="heading-text">Sài Gòn</span>
-                    </a>
-                </div>
-            </div>
+            {% for dia_diem in dia_diems %}
+                {% if forloop.counter <= 4 %}
+                    <div class="col-sm-6 col-6 col-md-3 location-item">
+                        <div class="inner">
+                            <div class="thumb">
+                                <img>                  
+                                <h3 class="heading-text">{{ dia_diem.ten }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 </section>

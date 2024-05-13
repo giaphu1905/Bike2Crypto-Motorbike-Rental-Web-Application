@@ -5,7 +5,7 @@
 {% block mycss %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'rent/home/css/home_rent.css' %}">
-
+    
 {% endblock %}
 {% block content %}
     <section class="hero-image">
@@ -24,7 +24,7 @@
                     <div class="col-md-5" data-select2-id="6">
                         <div class="car-rental-wrapper">
                             <div class="main-wrapper">
-                                <form method="post" action="" id="hq-book-form">
+                                <form method="post" action="" id="thue-xe-form">
                                     {% csrf_token %}
                                     <div class="inputs">
                                         <div class="content locations">
@@ -34,7 +34,7 @@
                                             <div class="content-inputs">
                                                 <div class="location-drop">
                                                     <i class='bx bx-map'></i>
-                                                    <select id="pickup_location" class="selectpicker form-control" name="pickup-location">
+                                                    <select id="pickup_location" class="selectpicker form-control" name="pickup_location">
                                                         <option>Chọn điểm nhận xe</option> 
                                                         {% for dia_diem in dia_diems %}
                                                             <option>{{ dia_diem.ten }}</option>
@@ -57,12 +57,12 @@
                                             <div class="content-inputs">
                                                 <div class="date-select">
                                                     <i class='bx bx-calendar'></i>
-                                                    <input class="second-row-input form-control" id="today" type="date" name="order-day">
+                                                    <input class="second-row-input form-control" id="today" type="date" name="order_day">
                                                 </div>
                                                 <h4 class="location-title">Thông tin trả xe</h4>
                                                 <div id="return_loc_wrapper" class="location-drop">
                                                     <i class='bx bx-map'></i>
-                                                    <select id="return_location" class="selectpicker form-control" name="return-location">
+                                                    <select id="return_location" class="selectpicker form-control" name="return_location">
                                                         <option>Chọn điểm trả xe</option> 
                                                         {% for dia_diem in dia_diems %}
                                                             <option>{{ dia_diem.ten }}</option>
@@ -71,7 +71,7 @@
                                                 </div>
                                                 <div class="date-select">
                                                     <i class='bx bx-calendar'></i>
-                                                    <input class="second-row-input form-control" id="return-day" type="date" name="return-day">
+                                                    <input class="second-row-input form-control" id="return-day" type="date" name="return_day">
                                                 </div>
                                             </div>   
                                         </div>   
@@ -99,7 +99,8 @@
         <div class="container">
             <h2 class="s-title">
                 <span>
-                    DANH MỤC XE MÁY            </span>
+                    DANH MỤC XE MÁY
+                </span>
             </h2>
             <p class="sub-title">
                  Toàn bộ xe máy cho thuê của chúng tôi là xe được mua mới 100%, được đăng ký chính chủ. Ngoài ra, các xe sau khi kết thúc hợp đồng với khách sẽ được kiểm tra, bảo dưỡng, thay thế các bộ phận hỏng hóc và phải đạt chuẩn an toàn xe trước khi giao cho khách hàng mới.        </p>
@@ -110,101 +111,90 @@
                             <h3 class="moto-item-title">
                                 <span>Yamaha Sirius 110cc</span>
                             </h3>
-                            <p class="moto-item-price">
-                                <span>130</span>.000/ Ngày                            </p>
+                            <p class="moto-item-price"><span>130</span>.000/ Ngày</p>
                         </div>
                         <div class="col-md-12 ">
-
-                            <div class="moto-item-info">
-                                                                
-                                
+                            <div class="moto-item-info"></div>
+                        </div>
+                        <div class="col-md-12 text-center moto-link">
+                            <a href=""><img width="600" height="350" src="{% static 'images/xemay/sirius.png' %}" class="lazyloaded" data-ll-status="loaded">
+                                <img width="600" height="350" src="{% static 'images/xemay/sirius.png' %}">
+                            </a>
+                            <a href="tel:0338023344" class="btn btn-rental  btn-yellow">Đặt xe</a>
                         </div>
                     </div>
-                        <div class="col-md-12 text-center moto-link">
-                            <a href="#"><img width="600" height="350" src="{% static 'images/xemay/sirius.png' %}" class="lazyloaded" data-ll-status="loaded">
-                                <noscript><img width="600" height="350" src="{% static 'images/xemay/sirius.png' %}"></noscript></a>                        <a href="tel:0338023344" class="btn btn-rental  btn-yellow">Đặt xe                    </a>
-                    </div>
                 </div>
-            </div>
-                            <div class="col-md-3  align-items-center moto-item align-items-center">
-                        <div class="inner pt-5 pb-3  bg-gray">
-                            <div class="col-md-12 moto-header">
-                                <h3 class="moto-item-title">
-                                    <span>Honda Vision 110cc</span>
-                                </h3>
-                                <p class="moto-item-price">
-                                    <span>180</span>.000/ Ngày
-                                </p>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="moto-item-info">    
-                            </div>
+                <div class="col-md-3  align-items-center moto-item align-items-center">
+                    <div class="inner pt-5 pb-3  bg-gray">
+                        <div class="col-md-12 moto-header">
+                            <h3 class="moto-item-title">
+                                <span>Honda Vision 110cc</span>
+                            </h3>
+                            <p class="moto-item-price"><span>180</span>.000/ Ngày</p>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="moto-item-info"></div>
                         </div>
                         <div class="col-md-12 text-center moto-link">
                             <a href="#"><img width="600" height="350" src="{% static 'images/xemay/vision.png' %}" class="lazyloaded" data-ll-status="loaded">
-                                <noscript><img width="600" height="350" src="{% static 'images/xemay/vision.png' %}"></noscript></a>                        <a href="tel:0338023344" class="btn btn-rental  btn-yellow">Đặt xe                    </a>
+                            <img width="600" height="350" src="{% static 'images/xemay/vision.png' %}"></a>
+                            <a href="tel:0338023344" class="btn btn-rental  btn-yellow">Đặt xe</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-                            <div class="col-md-3  align-items-center moto-item align-items-center">
-                        <div class="inner pt-5 pb-3  bg-gray">
-                            <div class="col-md-12 moto-header">
-                                <h3 class="moto-item-title">
-                                    <span>Honda AirBlade 125cc</span>
-                                </h3>
-                                <p class="moto-item-price">
-                                    <span>200</span>.000/ Ngày                            </p>
-                            </div>
-                            <div class="col-md-12 ">
-    
-                                <div class="moto-item-info">
-                                                                    
-                                    
-                            </div>
+                <div class="col-md-3  align-items-center moto-item align-items-center">
+                    <div class="inner pt-5 pb-3  bg-gray">
+                        <div class="col-md-12 moto-header">
+                            <h3 class="moto-item-title">
+                                <span>Honda AirBlade 125cc</span>
+                            </h3>
+                            <p class="moto-item-price"><span>200</span>.000/ Ngày</p>
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="moto-item-info"></div>
                         </div>
                         <div class="col-md-12 text-center moto-link">
                             <a href="#"><img width="600" height="350" src="{% static 'images/xemay/airblade.png' %}" class="lazyloaded" data-ll-status="loaded">
-                                <noscript><img width="600" height="350" src="{% static 'images/xemay/airblade.png' %}"></noscript></a>                        <a href="tel:0338023344" class="btn btn-rental  btn-yellow">Đặt xe                    </a>
+                                <img width="600" height="350" src="{% static 'images/xemay/airblade.png' %}">
+                            </a>
+                            <a href="tel:0338023344" class="btn btn-rental  btn-yellow">Đặt xe</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-                            <div class="col-md-3  align-items-center moto-item align-items-center">
-                        <div class="inner pt-5 pb-3  bg-gray">
-                            <div class="col-md-12 moto-header">
-                                <h3 class="moto-item-title">
-                                    <span>Honda WinnerX 150cc</span>
-                                </h3>
-                                <p class="moto-item-price">
-                                    <span>300</span>.000/ Ngày                            </p>
-                            </div>
-                            <div class="col-md-12 ">
-    
-                                <div class="moto-item-info">
-    
-                            </div>
+                <div class="col-md-3  align-items-center moto-item align-items-center">
+                    <div class="inner pt-5 pb-3  bg-gray">
+                        <div class="col-md-12 moto-header">
+                            <h3 class="moto-item-title">
+                                <span>Honda WinnerX 150cc</span>
+                            </h3>
+                            <p class="moto-item-price"><span>300</span>.000/ Ngày</p>
+                        </div>
+                        <div class="col-md-12 ">
+                            <div class="moto-item-info"></div>
                         </div>
                         <div class="col-md-12 text-center moto-link">
                             <a href="#"><img width="600" height="350" src="{% static 'images/xemay/winnerx.png' %}" class="lazyloaded" data-ll-status="loaded">
-                                <noscript><img width="600" height="350" src="{% static 'images/xemay/winnerx.png' %}"></noscript></a>                        <a href="tel:0338023344" class="btn btn-rental  btn-yellow">Đặt xe                    </a>
+                                <img width="600" height="350" src="{% static 'images/xemay/winnerx.png' %}">
+                            </a>
+                            <a href="tel:0338023344" class="btn btn-rental  btn-yellow">Đặt xe                    </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+        <div class="cta-bottom">
+            <p class="text-center">
+                Để thuê xe máy dài ngày, vui lòng xem chi tiết bảng giá dưới đây!</p>
+            <p class="text-center line-bottom">
+                <a href="#" class="btn btn-price btn-line btn-yellow">Bảng giá thuê xe máy dài ngày</a>
+            </p>
         </div>
-    <div class="cta-bottom">
-        <p class="text-center">
-             Để thuê xe máy dài ngày, vui lòng xem chi tiết bảng giá dưới đây!    </p>
-        <p class="text-center line-bottom">
-            <a href="#" class="btn btn-price btn-line btn-yellow">Bảng giá thuê xe máy dài ngày</a>
-        </p>
-    </div>
     </div>
     {% include "rent/thue_xe_tai.html" %}
 </section>
 {% endblock %}
 {% block myjs %}
     {{ block.super }}
-    <script src="{% static 'rent/home/js/home_rent.js' %}"></script>
+    <script src="{% static 'rent/chucnangthuexe/js/today.js' %}"></script>
     <script>
         const sorting = document.querySelector('#pickup_location');
         const commentSorting = document.querySelector('#return_location');
@@ -229,14 +219,8 @@
             commentSorting.parentElement.setAttribute('class', commentSortingClass);
         }
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('today').min = today;
-            document.getElementById('today').addEventListener('change', (event) => {
-                document.getElementById('return-day').min = event.target.value;
-            });
-        });
-
+        
+        
         document.addEventListener('DOMContentLoaded', function() {
             const checkbox = document.querySelector('#same-return');
             const returnLocWrapper = document.querySelector('#return_loc_wrapper');
@@ -251,12 +235,30 @@
         });
 
         $(document).ready(function(){
-            $('#hq-book-form').on('submit', function(e){
-                if($('#pickup_location').val() == 'Chọn điểm nhận xe'){
+            $('#thue-xe-form').on('submit', function(e){
+                if($('#pickup_location').val() == 'Chọn điểm nhận xe' || $('#today').val() == '' || $('#return-day').val() == ''){
                     e.preventDefault();
-                    alert('Vui lòng chọn một điểm nhận xe.');
+                    alert('Vui lòng cho biết đầy đủ thông tin thuê xe.');
                 }
             });
         });
+
+        
     </script>
+    <script type="text/javascript">
+		jQuery(document).ready(function($) {
+			var list_moto = $('.s-list-moto .list-moto');
+			if(list_moto.children('.moto-item').length > 4){
+				list_moto.slick({
+					infinite: true,
+					arrows:false,
+					dots:true,
+					slidesToShow: 3,
+					slidesToScroll: 1
+				});
+			}
+		});
+	</script>
+    
+    
 {% endblock %}
