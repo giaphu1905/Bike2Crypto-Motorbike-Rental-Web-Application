@@ -1,0 +1,84 @@
+{% extends 'home_base.html' %}
+{% load static %}
+{% block title %}
+  Đặt xe tại {{ rent_info.pickup_location }}
+{% endblock %}
+
+{% block mycss %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/popup.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="page-cover location-page-cover">
+    <div class="overlay-color"></div>
+      <h1 class="page-title text-center">VỀ CHÚNG TÔI</h1>
+    </div>
+</div>
+    <div class="about-page-description page-description ">
+        <div class="container " style="height:20vh;">
+            <p style="text-align: left;">Là dịch vụ cho thuê xe máy tự lái chuyên nghiệp tại Việt Nam, cho phép người thuê có thể nhận xe tại một điểm và trả xe tại một điểm khác trên cùng một hệ thống. Với mục tiêu tạo ra tạo sự thuận tiện tối đa cho khách thuê xe, chúng tôi sẽ xây dựng hệ thống các trạm, điểm giao nhận xe trải dài tại tất cả các tỉnh thành phố du lịch, tạo ra mạng lưới điểm giao nhận xe rộng khắp cho phép người thuê nhận và đi đến bất kỳ thành phố nào cũng có thể trả xe.</p>
+        </div>
+    </div>
+    <div class="" style="padding:0;margin-left:calc( (100vw - 100% ) / -2  );margin-right:calc( (100vw - 100% ) / -2   );"><svg class="fusion-big-half-circle-candy" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewBox="0 0 100 100" preserveAspectRatio="none" style="fill:#f5f5f5;padding:0;"><path d="M0 0 C55 180 100 0 100 0 Z"></path></svg></div>
+    <div class="list-member">
+        <div class="container" style="height:40vh;">
+            <h2 class="list-title">Đội ngũ quản trị</h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 member">
+                    <div class="inner ">
+                        <h3 class="member-name">Trịnh Hà Gia Phú</h3>
+                        <p class="v-card">Founder and CEO</p>
+                        <p class="excerpt"></p>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 member">
+                    <div class="inner ">
+                        <h3 class="member-name">Phạm Hoàng Phúc</h3>
+                        <p class="v-card">Managers</p>
+                        <p class="excerpt">
+                           Người đã có sự đóng góp vào sự phát triển dịch vu giai đoạn ban đầu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="core-value">
+		<div class="container">
+		<h2 class="s-title">Giá trị hướng đến</h2>
+			<div class="row">
+				<div class="col-md-4 feature-content">
+					<h2 class="title">
+						ÂN TÂM
+					</h2>
+					<p>
+						 Với 100% xe cho thuê là xe máy mới, đồng đều về kiểu dáng chất lượng. Ngoài ra, các xe đều được áp dụng quy trình bảo dưỡng để đảm bảo xe luôn trong điều kiện tốt nhất trước khi giao xe cho khách.
+					</p>
+				</div>
+				<div class="col-md-4 feature-content">
+					<h2 class="title">
+						ĐỒNG HÀNH
+					</h2>
+					<p>
+						Chúng tôi cung cấp dịch vụ hỗ trợ khách hàng 24/24h thông qua các kênh hotline và Mạng xã hội, giúp giải đáp thắc mắc của khách hàng bất cứ khi nào cần.
+					</p>
+				</div>
+				<div class="col-md-4 feature-content">
+					<h2 class="title">
+						MINH BẠCH
+					</h2>
+					<p>
+						Sự minh bạch rõ ràng trong các chính sách thuê xe, mức giá thuê xe đều được công khai và thông báo cho khách hàng để đảm bảo khách hàng có thể yên tâm khi có vấn đề xảy ra.
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
+
+{% block myjs %}
+  {{ block.super }}
+  
+{% endblock %}

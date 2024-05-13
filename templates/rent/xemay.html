@@ -1,3 +1,4 @@
+{% load humanize %}
 <div class="row flex-wrap">
   <div class="col-md-9 col-sm-9 col-xs-12 car-rental-main-container">
     <div class="box box-open">
@@ -19,13 +20,13 @@
               <div class="panel-heading" style="padding-top: 1px;padding-left: 10px;padding-right: 10px;">
                 <div class="full-width car-rental-vehicle-class-rack-rate-details car-rental-vehicle-class-rack-rate-details-2">
                   <h2 class="d-flex" style="font-size: 20px;">
-                    ₫<div id="price-per-day"> {{ xemay.gia }}</div>
+                    ₫<div id="price-per-day"> {{ xemay.gia|intcomma }}</div>
                     <small class="day-label">/Ngày</small>
                   </h2>
                 </div>
 
                 <div class="full-width car-rental-vehicle-class-one-day-price-details car-rental-vehicle-class-one-day-price-details-2">
-                  <h5 class="d-flex" style="font-size: 13px;">₫ <div id="total-price"> </div>&nbsp;cho {{ rent_info.thoigian_thue }} ngày</h5>
+                  <h5 class="d-flex" style="font-size: 13px;">₫ <div id="total-price-{{xemay.id}}"> </div>&nbsp;cho {{ rent_info.thoigian_thue }} ngày</h5>
                 </div>
 
                 <h6>không bao gồm thuế và bảo hiểm</h6>
@@ -39,9 +40,17 @@
         {% empty %}
             <p>Chưa có xe có sẵn tại địa điểm này.</p>
         {% endfor %}
+        <script>
+          window.onload = function() {
+            var thoigian_thue = {{ rent_info.thoigian_thue }};
+            {% for xemay in ds_xemay %}
+                var total_price = thoigian_thue * {{ xemay.gia }};
+                document.getElementById('total-price-{{ xemay.id }}').innerText = total_price.toLocaleString('vi-VN');
+            {% endfor %}
+          }
+        </script>
       </div>
     </div>
   </div>
   {% include 'rent/tomluoc.html' %}
-
 </div>

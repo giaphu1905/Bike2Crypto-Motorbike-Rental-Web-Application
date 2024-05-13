@@ -6,4 +6,8 @@ app_name = "user"
 
 urlpatterns = [
     path('profile/', views.profile_user, name='profile_user'),
+    path('invoices/', views.ds_hoadon, name='invoices'),
+    path('invoices/search-order/', views.searchOrder, name='search-order'),
+    path('invoices/order-detail-<int:id>/', views.ChiTietHoaDon, name='order-detail'),
+    path('profile/change-password/', views.change_password, name='change-password'),
 ]

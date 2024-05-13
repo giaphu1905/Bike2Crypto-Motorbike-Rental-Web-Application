@@ -37,7 +37,8 @@ body {
 }
 
 .container {
-    padding-top: 3.75rem;
+    padding-top: 1.75rem;
+    height: 80vh;
 }
 
 .col-4 {

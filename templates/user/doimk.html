@@ -1,0 +1,51 @@
+{% extends "home_base.html" %}
+{% load static %}
+{% block title%}Thay đổi mật khẩu{% endblock %}
+
+{% block mycss %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'user/css/doimk.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container rounded bg-white mb-5" style="margin-top:120px">
+        <form method="post">
+            <h2 class="formTitle">
+                Thay đổi mật khẩu
+            </h2>
+            {% csrf_token %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div class="inputDiv">
+                <label class="inputLabel" for="password">Nhập mật khẩu cũ</label>
+                <input type="password" name="old_password" autocomplete="current-password" autofocus="" required="" id="id_old_password">
+            </div>
+            <div class="inputDiv">
+                <label class="inputLabel" for="confirmPassword">Nhập mật khẩu mới</label>
+                <input type="password" name="new_password1" autocomplete="new-password" required="" aria-describedby="id_new_password1_helptext" id="id_new_password1">
+            </div>
+            <div class="inputDiv">
+                <label class="inputLabel" for="confirmPassword">Xác nhận mật khẩu mới</label>
+                <input type="password" name="new_password2" autocomplete="new-password" required="" id="id_new_password2">
+            </div>
+            
+            <div class="buttonWrapper">
+                <button type="submit" id="submitButton" onclick="validateSignupForm()" class="submitButton pure-button pure-button-primary">
+                  <span>Lưu thay đổi</span>
+                  <span id="loader"></span>
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block myjs %}
+	{{ block.super }}
+	<script src="{% static 'user/js/doimk.js' %}"></script>
+{% endblock %}
+

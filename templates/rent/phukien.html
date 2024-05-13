@@ -15,14 +15,12 @@
 {% block content %}
   <div class="page-cover location-page-cover">
     <div class="overlay-color"></div>
-    <div class="container">
       <h1 class="page-title text-center">Đặt xe tại {{ rent_info.pickup_location }}</h1>
     </div>
-  </div>
   <p id="breadcrumbs">
     <span>
       <span><a href="/home">Trang chủ</a></span> »
-      <span class="breadcrumb_last" aria-current="page"><strong>Đặt xe tại {{ rent_info.pickup_location }}</strong></span>
+      <span class="breadcrumb_last" aria-current="page"><strong style="color:#5e871b;">Đặt xe tại {{ rent_info.pickup_location }}</strong></span>
     </span>
   </p>
   <form method="POST" action="" accept-charset="UTF-8" id="save-reservation-form" class="prevent-submit-by-enter loading-bar-on-submit">

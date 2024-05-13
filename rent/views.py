@@ -5,7 +5,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import SignUpForm
 from django.urls import reverse
-from .models import DiaDiem, Payment, PhuKien, XeMay, Order
+from .models import DiaDiem, Payment, PhuKien, XeMay, Order, OrderPhuKien
 from django.http import JsonResponse
 from user.forms import UserUpdateForm
 from django.views.generic import FormView
@@ -93,12 +93,13 @@ class ThueXeView(LoginRequiredMixin,View):
             rent_info['return_day'] = return_day_date.strftime("%d/%m/%Y")
         except:
             pass
-        request.session['rent_info'] = rent_info
         dia_diem_nhan_xe = DiaDiem.objects.get(ten=kwargs['pickup_location'])
         try:
             dia_diem_tra_xe = DiaDiem.objects.get(ten=rent_info['return_location'])
         except DiaDiem.DoesNotExist:
             dia_diem_tra_xe = dia_diem_nhan_xe
+            rent_info['return_location']=kwargs['pickup_location']
+        request.session['rent_info'] = rent_info
         ds_xemay = XeMay.objects.filter(dia_diem=dia_diem_nhan_xe, da_duoc_thue=False, dang_hong=False)
         
         ds_xemay = ds_xemay.values('loai_xe').annotate(id=Min('id')).order_by()
@@ -246,7 +247,21 @@ class ConfirmView(LoginRequiredMixin,View):
             ngay_tra=return_day,
             diachi_nhanxe=address,
             tong_tien=rent_info['tong_tien_thue']
+
         )
+        order.save()
+        phu_kien_thue = rent_info.get('phu_kien_thue', [])
+        for phu_kien in phu_kien_thue:
+            phu_kien_obj = PhuKien.objects.get(ten=phu_kien['ten'])
+            OrderPhuKien.objects.create(order=order, phu_kien=phu_kien_obj, so_luong=phu_kien['so_luong'])
+
+        # Add di_duong_dai if not 0
+        di_duong_dai = rent_info.get('di_duong_dai', 0)
+        order.phi_diduongdai = di_duong_dai
+
+        # Add bao_hiem if not 0
+        bao_hiem = rent_info.get('bao_hiem', 0)
+        order.phi_baohiem = bao_hiem
         order.save()
         return redirect('rent:thanh-cong', pickup_location=kwargs['pickup_location'], vehicle_id=kwargs['vehicle_id'], order_id=order.id)
 
@@ -317,20 +332,28 @@ def SuaThongTinNhanXe(request):
 def SuaThongTinTraXe(request):
     if request.method == 'POST':
         rent_info = request.session.get('rent_info', {})
-        order_day = request.POST.get('order_day')
         return_day = request.POST.get('return_day')
-        order_day_date = parse_date(order_day).date()
         return_day_date = parse_date(return_day).date()
-        thoigian_thue = (return_day_date - order_day_date).days
         try:
-            rent_info['order_day'] = order_day_date.strftime("%d/%m/%Y")
             rent_info['return_day'] = return_day_date.strftime("%d/%m/%Y")
         except:
             pass
-        rent_info['thoigian_thue'] = thoigian_thue
         return_location = request.POST.get('return_location')
+        if return_location == 'Chọn địa điểm trả xe':
+            return_location = rent_info['pickup_location']
         rent_info['return_location'] = return_location
-        dia_diem_tra_xe = DiaDiem.objects.get(ten=return_location)
         request.session['rent_info'] = rent_info
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+def ChinhSachThueXeMay(request):
+    user_login = request.user
+
+    return render(request, 'other/chinhsach.html', {'user_login': user_login})
+def GioiThieu(request):
+    user_login = request.user
+
+    return render(request, 'other/gioithieu.html', {'user_login': user_login})
+def LienHe(request):
+    user_login = request.user
+    return render(request, 'other/lienhe.html', {'user_login': user_login})

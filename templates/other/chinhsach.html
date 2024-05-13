@@ -1,0 +1,264 @@
+{% extends 'home_base.html' %}
+{% load static %}
+{% block title %}
+  Đặt xe tại {{ rent_info.pickup_location }}
+{% endblock %}
+
+{% block mycss %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/main.css' %}" />
+  <link rel="stylesheet" href="{% static 'rent/chucnangthuexe/css/popup.css' %}" />
+  <link rel="stylesheet" href="{% static 'other/main.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="page-cover location-page-cover">
+    <div class="overlay-color"></div>
+      <h1 class="page-title text-center">CHÍNH SÁCH</h1>
+    </div>
+    <div class="privacy-container">
+			<div class="container">
+				<!--PC-->
+				<div class="row d-none d-sm-none d-md-flex">
+					<div class="col-md-4">
+						<ul class="nav nav-tabs flex-column" id="privacy-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="privacy-tab-item-1" data-toggle="tab" href="#privacy-tab-1" role="tab" aria-controls="rivacy-tab-item-1" aria-selected="true">
+									Thời gian thuê xe								</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="privacy-tab-item-2" data-toggle="tab" href="#privacy-tab-2" role="tab" aria-controls="privacy-tab-item-2" aria-selected="false">
+								Thủ tục thuê xe</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="privacy-tab-item-3" data-toggle="tab" href="#privacy-tab-3" role="tab" aria-controls="privacy-tab-item-3" aria-selected="false">Giá thuê xe</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="privacy-tab-item-4" data-toggle="tab" href="#privacy-tab-4" role="tab" aria-controls="privacy-tab-item-4" aria-selected="false">Trách nhiệm bên thuê</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="privacy-tab-item-5" data-toggle="tab" href="#privacy-tab-5" role="tab" aria-controls="privacy-tab-item-5" aria-selected="false">Trách nhiệm bên cho thuê</a>
+							</li>							
+						</ul>
+					</div>
+					<div class="col-md-8">
+						<div class="entry">
+							<div class="tab-content" id="privacy-tav-content">
+								<div class="tab-pane fade active show" id="privacy-tab-1" role="tabpanel" aria-labelledby="home-tab">
+									<h2><strong>Thời gian thuê xe</strong></h2>
+<ul>
+<li><strong>Giá thuê xe sẽ được tính kết hợp theo ngày và theo giờ</strong></li>
+</ul>
+<p><strong>01 ngày thuê</strong> sẽ là 24 tiếng, tính từ giờ, thời điểm bạn nhận xe ngày hôm nay đến đúng giờ đó ngày hôm sau.<br>
+<strong>Giờ thuê xe</strong> chỉ được áp dụng khi bạn thuê xe &gt; 1 ngày. Giá theo giờ phát sinh sẽ tùy thuộc vào loại xe bạn thuê:</p>
+<table border="1" class="table">
+<tbody>
+<tr>
+<td><strong>Xe số</strong></td>
+<td>15k/tiếng phát sinh</td>
+</tr>
+<tr>
+<td><strong>Xe tay ga</strong></td>
+<td>20k/tiếng phát sinh</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>Lưu ý</em>: </strong>Nếu số giờ phát sinh của bạn &gt; 8 tiếng, MOTOGO sẽ tính tròn là 1 ngày thuê xe.</p>
+<p>Ví dụ: Bạn thuê một xe số Sirius,</p>
+<p><strong>Nhận xe:</strong> 9h sáng, 21/03/2022<br>
+<strong>Trả xe lúc:</strong> 3h chiều, 22/03/2022</p>
+<p>Hệ thống của chúng tôi sẽ tính toán như sau: Tổng thời gian bạn thuê xe sẽ là 1 ngày và 6 tiếng, bạn sẽ thay toán cho tổng thời gian thuê xe đó bao gồm giá thuê xe 1 ngày là 130k và giá thuê xe 06 tiếng phát sinh còn lại còn lại = 90k. Tổng số tiền thuê xe của bạn sẽ là 220k.</p>
+<ul>
+<li><strong>Ngày đầu tiên thuê xe, bạn thuê một vài tiếng thì vẫn phải trả tiền thuê xe tròn 1 ngày.</strong></li>
+</ul>
+<p>Ví dụ: <strong>Thời gian lấy xe của bạn là</strong> 9h sáng, 21/03/2022, Thời gian trả xe của bạn là 3h chiều cùng ngày thì HỆ THỐNG chúng tôi sẽ tính thời gian thuê xe là 1 ngày.</p>
+<ul>
+<li><strong>Đi quá 30 phút mới làm tròn thành 1 tiếng phát sinh.</strong></li>
+</ul>
+								</div>
+								<div class="tab-pane fade" id="privacy-tab-2" role="tabpanel" aria-labelledby="privacy-tab-item-2">
+									<h2 data-fontsize="18" data-lineheight="27"><strong>Thủ tục thuê xe</strong></h2>
+<p>Các bước làm thủ tục thuê xe như sau:</p>
+<p><strong>1</strong>– Khách thuê xe phải là người trong độ tuổi được phép lái xe và có Giấy phép lái xe được cấp bởi cơ quan nhà nước có thẩm quyền.</p>
+<p><strong>2</strong>– Phải để lại các giấy tờ sau trong các giấy tờ sau:</p>
+<p>Đối với khách du lịch đi&nbsp; bằng máy bay vui lòng để lại <strong>CMND, thẻ Căn cước Công dân&nbsp;</strong>hoặc<strong>&nbsp;Hộ chiếu&nbsp;</strong>kèm với<strong> thông tin chuyến bay đến và rời.</strong></p>
+<p>Với khách là người địa phương hoặc từ nơi khác đến không có vé máy bay, thủ tục yêu cầu là để lại&nbsp;<strong>CMND, thẻ Căn cước Công dân&nbsp;</strong>hoặc<strong>&nbsp;Hộ chiếu&nbsp;</strong>kèm&nbsp;<strong>Sổ hộ khẩu&nbsp;</strong>(nếu không có sổ hộ khẩu sẽ thay thế bằng&nbsp;<strong>tiền đặt cọc 3 triệu</strong> đồng đối với xe số và <strong>tiền đặt cọc 5 triệu</strong> đồng đối với xe tay ga - số tiền này chúng tôi sẽ hoàn trả lại sau khi khách hàng hoàn tất trả xe)</p>
+<p><strong>3</strong>– Đồng ý các điều khoản và ký vào hợp đồng thuê xe giữa 2 bên.</p>
+<p><strong>4</strong>– Nhận xe.</p>
+<p><strong>Lưu ý</strong>:&nbsp;Thuê xe theo đoàn thì chỉ cần 1 người đứng ra làm thủ tục thuê xe.</p>
+								</div>								
+								<div class="tab-pane fade" id="privacy-tab-3" role="tabpanel" aria-labelledby="privacy-tab-item-3">
+									<h2 data-fontsize="24" data-lineheight="31">Giá thuê xe</h2>
+<p>Giá cho thuê xe máy tại các tỉnh thành phố sẽ khác nhau do mỗi nơi có những điều kiện địa hình khác nhau, ảnh hưởng đến chất lượng xe khác nhau. Mỗi thị trường sẽ có bảng giá, đơn giá theo ngày khác nhau, tuy nhiên cách tính về khung thời gian, chính sách áp dụng chung không thay đổi.</p>
+<p>Giá cho thuê xe sẽ phụ thộc vào loại xe bạn thuê và được công khai trên website. Chúng tôi cam kết sẽ không tăng giá thuê xe khi khách hàng đang sử dụng dịch vụ của chúng tôi. Để xem chi tiết mức giá từng loại xe xin vui lòng click vào <a href="https://motogo.vn/bang-gia-thue-xe-may/">bảng giá thuê xe</a>.</p>
+<p>Giá trị hợp đồng thuê xe sẽ được tính dựa trên thời gian thuê xe của khách và giá thuê xe tính theo đơn vị ngày, giờ đối với từng loại xe.</p>
+								</div>
+								<div class="tab-pane fade" id="privacy-tab-4" role="tabpanel" aria-labelledby="privacy-tab-item-4">
+									<h2 data-fontsize="24" data-lineheight="31">Trách nhiệm bên thuê</h2>
+<p>Người thuê xe sẽ phải tự đổ nhiên liệu cho xe để di chuyển.</p>
+<p>Kiểm tra kỹ xe trước khi nhận và tự đổ nhiên liệu để lưu thông xe trên đường.</p>
+<p>Không được bóc hay làm rách tem bảo hành và đảm bảo sửa chữa, thay thế bất cứ chi tiết nào.</p>
+<p>Trong thời gian sử dụng xe thuê, bên B phải có trách nghiệm bảo vệ, giữ dìn và điều khiển xe tuân thủ đúng với luật oan toàn giao thông Việt Nam. Trường hợp xẩy ra vấn đề phát sinh sẽ được giải quyết như dưới đây:</p>
+<ul>
+<li>Bên B phải báo lại cho bên A khi có các vấn đề hỏng hóc xẩy ra để hai bên thống nhất phương án thực hiện.</li>
+<li>Mọi sự cố bẹp, nứt, vỡ, móp méo các chi tiết của xe do người thuê gây ra thì người thuê phải mua đồ của hãng thay thế (không chấp nhận gò, hàn).</li>
+<li>Đối với việc thủng săm, thủng lốp khi lưu thông trên đường, khách thuê xe sẽ phải tự khắc phục và trả khoản phí vá săm hoặc thay thế.</li>
+<li>Các vết xước, bẹp nhẹ không phải thay đồ mới thì người thuê phải bồi thường cho cho thuê số tiền theo báo giá thị trường.</li>
+<li>Các ngày xe nghỉ không chạy được do lỗi của bên thuê, thì bạn vẫn phải trả tiền cho các ngày đó như đang thuê xe để sử dụng.</li>
+<li>Trường hợp người thuê xe vi phạm an toàn giao thông dẫn tới xe bị giữ thì người thuê xe phải có tránh nhiệm đóng toàn bộ tiền các lỗi vi phạm và thời gian giữ xe vẫn tính là ngày cho thuê xe. Mọi chi phí đi lại, ăn ở, vvv…của bên cho thuê để giải quyết việc do bên thuê gây ra, bên thuê phải chịu hoàn toàn trách nhiệm chi trả.</li>
+<li>Trong thời gian thuê xe người thuê làm mất xe, gây tai nạn nghiêm trọng dẫn đến xe bị phá hủy hoàn toàn thì người thuê phải chịu trách nhiệm đền tiền, giá trị tương đương với giá trị xe được định giá tại thời điểm cho thuê xe.</li>
+</ul>
+<p>Đối với khách đi dài, cứ sau 30 ngày bên B phải mang xe về để bên A kiểm tra và bảo dưỡng xe định kỳ 1 lần.</p>
+<p>Bên thuê phải có trách nhiệm trả xe đúng hạn như đã thống nhất trên hợp đồng. Trường hợp bên thuê muốn gia hạn thêm thời gian sử dụng thì phải liên hệ báo trước cho bên A, và khoản phát sinh thuê thêm sẽ vẫn được tính dựa trên bảng giá dịch vụ của bên A.</p>
+								</div>
+								<div class="tab-pane fade" id="privacy-tab-5" role="tabpanel" aria-labelledby="privacy-tab-item-5">
+									<h2 data-fontsize="24" data-lineheight="31">Trách nhiệm bên cho thuê</h2>
+<p>Bên cho thuê phải đảm bảo xe cho thuê có đầy đủ điều kiện an toàn lưu thông trên đường, đúng như cam kết thỏa thuận với khách hàng. Với mỗi xe cho thuê chỉ đi kèm 02 mũ bảo hiểm theo tiêu chuẩn.</p>
+<p>Cung cấp các giấy tờ sau cho người thuê xe: Bản photo giấy đăng ký xe, Bảo hiểm trách nhiệm dân sự xe. Có trách nhiêm giúp đỡ, hỗ trợ, hướng dẫn người thuê trong các tình huống cần có sự xuất hiện của chủ xe.</p>
+<h2 data-fontsize="24" data-lineheight="31">Đổi trả, chấm dứt hợp đồng</h2>
+<p>Trường hợp dịch vụ cung cấp không đúng như cam kết giữa 2 bên, khách hàng có quyền từ chối sử dụng dịch vụ hoặc yêu cầu thay thế xe bằng loại xe khác đúng như yêu cầu. Bên cho thuê xe phải có trách nhiệm gửi trả lại toàn bộ tiền đặt cọc cho khách nếu khách từ chối sử dụng dịch vụ trong trường hợp này.</p>
+<p>Trường hợp khách hàng kết thúc hợp đồng thuê xe máy sớm hơn thời gian thống nhất ghi trong hợp đồng, bên cho thuê chấp nhận thời điểm trả xe là thời điểm kết thúc hợp đồng và giá trị hợp đồng được tính đến thời điểm đó. Tiền thừa sẽ được hoàn trả lại khách.</p>
+<p>Đối với khách đã đặt lịch thuê xe, khách hàng có thể hủy bỏ lịch đặt xe bất kỳ lúc nào mà không phải chịu khoản chi phí kèm theo.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--End PC-->
+				<!--Mobile-->
+				<div class="d-block d-md-none d-sm-block">
+					<div class="accordion accordion-privacy" id="accordion-privacy">
+						<div class="card">
+							<div class="card-header" id="headingOne">
+								<a class="btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									Thời gian thuê xe								</a>
+							</div>
+							<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion-privacy">
+								<div class="card-body entry">
+									<h2><strong>Thời gian thuê xe</strong></h2>
+<ul>
+<li><strong>Giá thuê xe sẽ được tính kết hợp theo ngày và theo giờ</strong></li>
+</ul>
+<p><strong>01 ngày thuê</strong> sẽ là 24 tiếng, tính từ giờ, thời điểm bạn nhận xe ngày hôm nay đến đúng giờ đó ngày hôm sau.<br>
+<strong>Giờ thuê xe</strong> chỉ được áp dụng khi bạn thuê xe &gt; 1 ngày. Giá theo giờ phát sinh sẽ tùy thuộc vào loại xe bạn thuê:</p>
+<table border="1" class="table">
+<tbody>
+<tr>
+<td><strong>Xe số</strong></td>
+<td>15k/tiếng phát sinh</td>
+</tr>
+<tr>
+<td><strong>Xe tay ga</strong></td>
+<td>20k/tiếng phát sinh</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>Lưu ý</em>: </strong>Nếu số giờ phát sinh của bạn &gt; 8 tiếng, MOTOGO sẽ tính tròn là 1 ngày thuê xe.</p>
+<p>Ví dụ: Bạn thuê một xe số Sirius,</p>
+<p><strong>Nhận xe:</strong> 9h sáng, 21/03/2022<br>
+<strong>Trả xe lúc:</strong> 3h chiều, 22/03/2022</p>
+<p>Hệ thống của chúng tôi sẽ tính toán như sau: Tổng thời gian bạn thuê xe sẽ là 1 ngày và 6 tiếng, bạn sẽ thay toán cho tổng thời gian thuê xe đó bao gồm giá thuê xe 1 ngày là 130k và giá thuê xe 06 tiếng phát sinh còn lại còn lại = 90k. Tổng số tiền thuê xe của bạn sẽ là 220k.</p>
+<ul>
+<li><strong>Ngày đầu tiên thuê xe, bạn thuê một vài tiếng thì vẫn phải trả tiền thuê xe tròn 1 ngày.</strong></li>
+</ul>
+<p>Ví dụ: <strong>Thời gian lấy xe của bạn là</strong> 9h sáng, 21/03/2022, Thời gian trả xe của bạn là 3h chiều cùng ngày thì HỆ THỐNG chúng tôi sẽ tính thời gian thuê xe là 1 ngày.</p>
+<ul>
+<li><strong>Đi quá 30 phút mới làm tròn thành 1 tiếng phát sinh.</strong></li>
+</ul>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-header" id="headingTwo">
+								<a class="btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+									Thủ tục thuê xe								</a>
+							</div>
+							<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion-privacy">
+								<div class="card-body entry">
+									<h2 data-fontsize="18" data-lineheight="27"><strong>Thủ tục thuê xe</strong></h2>
+<p>Các bước làm thủ tục thuê xe như sau:</p>
+<p><strong>1</strong>– Khách thuê xe phải là người trong độ tuổi được phép lái xe và có Giấy phép lái xe được cấp bởi cơ quan nhà nước có thẩm quyền.</p>
+<p><strong>2</strong>– Phải để lại các giấy tờ sau trong các giấy tờ sau:</p>
+<p>Đối với khách du lịch đi&nbsp; bằng máy bay vui lòng để lại <strong>CMND, thẻ Căn cước Công dân&nbsp;</strong>hoặc<strong>&nbsp;Hộ chiếu&nbsp;</strong>kèm với<strong> thông tin chuyến bay đến và rời.</strong></p>
+<p>Với khách là người địa phương hoặc từ nơi khác đến không có vé máy bay, thủ tục yêu cầu là để lại&nbsp;<strong>CMND, thẻ Căn cước Công dân&nbsp;</strong>hoặc<strong>&nbsp;Hộ chiếu&nbsp;</strong>kèm&nbsp;<strong>Sổ hộ khẩu&nbsp;</strong>(nếu không có sổ hộ khẩu sẽ thay thế bằng&nbsp;<strong>tiền đặt cọc 3 triệu</strong> đồng đối với xe số và <strong>tiền đặt cọc 5 triệu</strong> đồng đối với xe tay ga - số tiền này chúng tôi sẽ hoàn trả lại sau khi khách hàng hoàn tất trả xe)</p>
+<p><strong>3</strong>– Đồng ý các điều khoản và ký vào hợp đồng thuê xe giữa 2 bên.</p>
+<p><strong>4</strong>– Nhận xe.</p>
+<p><strong>Lưu ý</strong>:&nbsp;Thuê xe theo đoàn thì chỉ cần 1 người đứng ra làm thủ tục thuê xe.</p>
+								</div>
+							</div>
+						</div>						
+						<div class="card">
+							<div class="card-header" id="headingThree">
+								<a class=" btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+									Giá thuê xe								</a>
+							</div>
+							<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion-privacy">
+								<div class="card-body entry">
+									<h2 data-fontsize="24" data-lineheight="31">Giá thuê xe</h2>
+<p>Giá cho thuê xe máy tại các tỉnh thành phố sẽ khác nhau do mỗi nơi có những điều kiện địa hình khác nhau, ảnh hưởng đến chất lượng xe khác nhau. Mỗi thị trường sẽ có bảng giá, đơn giá theo ngày khác nhau, tuy nhiên cách tính về khung thời gian, chính sách áp dụng chung không thay đổi.</p>
+<p>Giá cho thuê xe sẽ phụ thộc vào loại xe bạn thuê và được công khai trên website. Chúng tôi cam kết sẽ không tăng giá thuê xe khi khách hàng đang sử dụng dịch vụ của chúng tôi. Để xem chi tiết mức giá từng loại xe xin vui lòng click vào <a href="https://motogo.vn/bang-gia-thue-xe-may/">bảng giá thuê xe</a>.</p>
+<p>Giá trị hợp đồng thuê xe sẽ được tính dựa trên thời gian thuê xe của khách và giá thuê xe tính theo đơn vị ngày, giờ đối với từng loại xe.</p>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-header" id="headingFour">
+								<a class=" btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+									Trách nhiệm bên thuê								</a>
+							</div>
+							<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion-privacy">
+								<div class="card-body entry">
+									<h2 data-fontsize="24" data-lineheight="31">Trách nhiệm bên thuê</h2>
+<p>Người thuê xe sẽ phải tự đổ nhiên liệu cho xe để di chuyển.</p>
+<p>Kiểm tra kỹ xe trước khi nhận và tự đổ nhiên liệu để lưu thông xe trên đường.</p>
+<p>Không được bóc hay làm rách tem bảo hành và đảm bảo sửa chữa, thay thế bất cứ chi tiết nào.</p>
+<p>Trong thời gian sử dụng xe thuê, bên B phải có trách nghiệm bảo vệ, giữ dìn và điều khiển xe tuân thủ đúng với luật oan toàn giao thông Việt Nam. Trường hợp xẩy ra vấn đề phát sinh sẽ được giải quyết như dưới đây:</p>
+<ul>
+<li>Bên B phải báo lại cho bên A khi có các vấn đề hỏng hóc xẩy ra để hai bên thống nhất phương án thực hiện.</li>
+<li>Mọi sự cố bẹp, nứt, vỡ, móp méo các chi tiết của xe do người thuê gây ra thì người thuê phải mua đồ của hãng thay thế (không chấp nhận gò, hàn).</li>
+<li>Đối với việc thủng săm, thủng lốp khi lưu thông trên đường, khách thuê xe sẽ phải tự khắc phục và trả khoản phí vá săm hoặc thay thế.</li>
+<li>Các vết xước, bẹp nhẹ không phải thay đồ mới thì người thuê phải bồi thường cho cho thuê số tiền theo báo giá thị trường.</li>
+<li>Các ngày xe nghỉ không chạy được do lỗi của bên thuê, thì bạn vẫn phải trả tiền cho các ngày đó như đang thuê xe để sử dụng.</li>
+<li>Trường hợp người thuê xe vi phạm an toàn giao thông dẫn tới xe bị giữ thì người thuê xe phải có tránh nhiệm đóng toàn bộ tiền các lỗi vi phạm và thời gian giữ xe vẫn tính là ngày cho thuê xe. Mọi chi phí đi lại, ăn ở, vvv…của bên cho thuê để giải quyết việc do bên thuê gây ra, bên thuê phải chịu hoàn toàn trách nhiệm chi trả.</li>
+<li>Trong thời gian thuê xe người thuê làm mất xe, gây tai nạn nghiêm trọng dẫn đến xe bị phá hủy hoàn toàn thì người thuê phải chịu trách nhiệm đền tiền, giá trị tương đương với giá trị xe được định giá tại thời điểm cho thuê xe.</li>
+</ul>
+<p>Đối với khách đi dài, cứ sau 30 ngày bên B phải mang xe về để bên A kiểm tra và bảo dưỡng xe định kỳ 1 lần.</p>
+<p>Bên thuê phải có trách nhiệm trả xe đúng hạn như đã thống nhất trên hợp đồng. Trường hợp bên thuê muốn gia hạn thêm thời gian sử dụng thì phải liên hệ báo trước cho bên A, và khoản phát sinh thuê thêm sẽ vẫn được tính dựa trên bảng giá dịch vụ của bên A.</p>
+								</div>
+							</div>
+						</div>
+						<div class="card">
+							<div class="card-header" id="headingFive">
+								<a class=" btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+									Trách nhiệm bên cho thuê								</a>
+							</div>
+							<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion-privacy">
+								<div class="card-body entry">
+									<h2 data-fontsize="24" data-lineheight="31">Trách nhiệm bên cho thuê</h2>
+<p>Bên cho thuê phải đảm bảo xe cho thuê có đầy đủ điều kiện an toàn lưu thông trên đường, đúng như cam kết thỏa thuận với khách hàng. Với mỗi xe cho thuê chỉ đi kèm 02 mũ bảo hiểm theo tiêu chuẩn.</p>
+<p>Cung cấp các giấy tờ sau cho người thuê xe: Bản photo giấy đăng ký xe, Bảo hiểm trách nhiệm dân sự xe. Có trách nhiêm giúp đỡ, hỗ trợ, hướng dẫn người thuê trong các tình huống cần có sự xuất hiện của chủ xe.</p>
+<h2 data-fontsize="24" data-lineheight="31">Đổi trả, chấm dứt hợp đồng</h2>
+<p>Trường hợp dịch vụ cung cấp không đúng như cam kết giữa 2 bên, khách hàng có quyền từ chối sử dụng dịch vụ hoặc yêu cầu thay thế xe bằng loại xe khác đúng như yêu cầu. Bên cho thuê xe phải có trách nhiệm gửi trả lại toàn bộ tiền đặt cọc cho khách nếu khách từ chối sử dụng dịch vụ trong trường hợp này.</p>
+<p>Trường hợp khách hàng kết thúc hợp đồng thuê xe máy sớm hơn thời gian thống nhất ghi trong hợp đồng, bên cho thuê chấp nhận thời điểm trả xe là thời điểm kết thúc hợp đồng và giá trị hợp đồng được tính đến thời điểm đó. Tiền thừa sẽ được hoàn trả lại khách.</p>
+<p>Đối với khách đã đặt lịch thuê xe, khách hàng có thể hủy bỏ lịch đặt xe bất kỳ lúc nào mà không phải chịu khoản chi phí kèm theo.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--End mobile-->
+			</div>
+		</div>
+  </div>
+{% endblock %}
+
+{% block myjs %}
+  {{ block.super }}
+  	<script>
+		$(document).ready(function(){
+			$('.nav-tabs a').click(function(){
+				$(this).tab('show');
+			});
+		});
+	</script>
+{% endblock %}

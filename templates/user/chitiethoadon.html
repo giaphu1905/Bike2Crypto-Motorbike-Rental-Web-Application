@@ -1,0 +1,144 @@
+{% extends "home_base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title%}Hóa đơn{% endblock %}
+
+{% block mycss %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'user/css/hoadon.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container rounded bg-white mb-5" style="margin-top:120px; padding-top: 30px">
+        <div class="d-flex justify-content-center">
+            <h3 class="text-right">Thông tin hóa đơn</h3>
+        </div>
+        <div class="col-md-12">   
+            <div class="row">
+                <div class="receipt-main col-xs-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+                    <div class="row">
+                        <div class="d-flex">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="receipt-right">
+                                    <h5>{{user_login.fullname}} </h5>
+                                    <p><b>Điện thoại: </b>{{user_login.phone_number}}</p>
+                                    <p><b>Ngày sinh: </b>{{user_login.date_of_birth}}</p>
+                                    <p><b>Địa chỉ: </b>{{user_login.address}}</p>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                                <div class="receipt-right">
+                                    <h5>Tên công ty</h5>
+                                    <p>0817978289<i class="fa fa-phone"></i></p>
+                                    <p>company@gmail.com <i class="fa fa-envelope-o"></i></p>
+                                    <p>TP. Hồ Chí Minh<i class="fa fa-location-arrow"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="receipt-header receipt-header-mid d-flex justify-content-center">
+                            <div class="d-flex justify-content-center col-xs-4 col-sm-4 col-md-4">
+                                <div class="receipt-left">
+                                    <h3>HÓA ĐƠN #{{order.id}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="col-md-3">Mô tả</th>
+                                    <th class="col-md-2">Số ngày thuê</th>
+                                    <th class="col-md-2">Giá mỗi ngày</th>
+                                    <th class="col-md-2">Số lượng</th>
+                                    <th class="col-md-3">Thành tiền</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <div class="d-flex justify-content-between">
+                                            <span>Loại xe thuê:</span>
+                                            <span>{{order.xe.loai_xe}}</span>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2">{{order.thoigian_thue}}</td>
+                                    <td class="col-md-2 text-right">{{order.xe.gia|intcomma}}đ</td>
+                                    <td class="col-md-2">1</td>
+                                    <td id="giathuedays" class="col-md-2 text-right"></td>
+                                </tr>
+                                {% if order.phi_diduongdai != '0' %}
+                                <tr>
+                                    <td class="col-md-4">Đi đường dài</td>
+                                    <td class="col-md-2">{{order.thoigian_thue}}</td>
+                                    <td id="gia1duongdai" class="col-md-2 text-right"></td>
+                                    <td class="col-md-2">-</td>
+                                    <td class="col-md-2 text-right">{{order.phi_diduongdai|intcomma}}đ</td>
+                                </tr>
+                                {% endif %}
+                                {% if order.phi_baohiem != '0' %}
+                                <tr>
+                                    <td class="col-md-4">Bảo hiểm</td>
+                                    <td class="col-md-2">{{order.thoigian_thue}}</td>
+                                    <td id="gia1baohiem" class="col-md-2 text-right"></td>
+                                    <td class="col-md-2">-</td>
+                                    <td class="col-md-2 text-right">{{order.phi_baohiem|intcomma}}đ</td>
+                                </tr>
+                                {% endif %}
+                                {% for orderphukien in order.orderphukien_set.all %}
+                                    <tr>
+                                        <td class="col-md-7">{{orderphukien.phu_kien.ten}}</td>
+                                        <td class="col-md-1">{{order.thoigian_thue}}</td>
+                                        <td class="col-md-1 text-right">{{orderphukien.phu_kien.gia}}</td>
+                                        <td class="col-md-1">{{orderphukien.so_luong}}</td>
+                                        <td class="col-md-2 text-right" id="total_price_{{orderphukien.id}}"></td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td class="text-right text-right" colspan="4"><h2><strong>TỔNG TIỀN: </strong></h2></td>
+                                    <td class="text-left text-danger text-right"><h2><strong>{{order.tong_tien|intcomma}}đ</strong></h2></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="receipt-header receipt-header-mid receipt-footer">
+                            <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                                <div class="receipt-right">
+                                    <p><b>Ngày :</b>{{order.ngay_thue}}</p>
+                                    <h5 style="color: rgb(140, 140, 140);">Cảm ơn đã đặt đơn hàng.!</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>    
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block myjs %}
+	{{ block.super }}
+	<script>
+        window.onload = function() {
+            var thoigian_thue = {{ order.thoigian_thue }};
+            var gia1ngaydiduongdai = {{order.phi_diduongdai}} / thoigian_thue;
+            var gia1ngaybaohiem = {{order.phi_baohiem}} / thoigian_thue;
+            var giathuedays = {{order.xe.gia}} * thoigian_thue;
+            document.getElementById('giathuedays').innerText = giathuedays.toLocaleString('vi-VN')+'đ';
+            document.getElementById('gia1duongdai').innerText = gia1ngaydiduongdai.toLocaleString('vi-VN')+'đ';
+            document.getElementById('gia1baohiem').innerText = gia1ngaybaohiem.toLocaleString('vi-VN')+'đ';
+            {% for orderphukien in order.orderphukien_set.all %}
+                var total_price = document.getElementById("total_price_{{orderphukien.id}}");
+                var total = {{order.thoigian_thue}} * {{orderphukien.phu_kien.gia}} * {{orderphukien.so_luong}} ;
+                total_price.textContent = total.toLocaleString('vi-VN') + 'đ';
+            {% endfor %}
+        };
+    </script>
+{% endblock %}
+

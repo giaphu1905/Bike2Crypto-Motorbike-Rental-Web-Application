@@ -1,0 +1,45 @@
+{% extends "home_base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title%}Hồ sơ người dùng{% endblock %}
+
+{% block mycss %}
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static 'user/css/ds_hoadon.css' %}">
+
+{% endblock %}
+
+{% block content %}
+    <div style="margin-top:90px;">
+        <div class="d-flex">
+            <div class="title-ds-hoa-don">
+                Danh sách hóa đơn bạn đã đặt
+            </div>
+            <div class="box">
+                <form action="{% url 'user:search-order' %}" method="get" name="search">
+                    <input type="text" class="input" name="search_order" onmouseout="this.value = ''; this.blur();">
+                </form>
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        
+        <div class="container rounded bg-white mb-5" style="margin-top:40px; overflow: auto;">
+            <div class="team row">
+                {% for order in ds_order_user %}
+                    <a href="{% url 'user:order-detail' order.id %}" class="member">
+                        <div class="thumb"><h2>Order #{{order.id}}</h2></div>
+                        <div class="description">
+                            <p>{{order.getName}}<br><span class="amount">đ{{order.tong_tien|intcomma}}</span></p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block myjs %}
+	{{ block.super }}
+	
+{% endblock %}
+

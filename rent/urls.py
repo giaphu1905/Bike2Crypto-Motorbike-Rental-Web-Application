@@ -24,6 +24,10 @@ urlpatterns = [
 
     path('sua-thong-tin-nhan-xe/', views.SuaThongTinNhanXe, name='sua-thong-tin-nhan-xe'),
     path('sua-thong-tin-tra-xe/', views.SuaThongTinTraXe, name='sua-thong-tin-tra-xe'),
+
+    path('chinh-sach-thue-xe-may/', views.ChinhSachThueXeMay, name='chinh-sach'),
+    path('gioi-thieu/', views.GioiThieu, name='gioi-thieu'),
+    path('lien-he/', views.LienHe, name='lien-he'),
 ]
 
 

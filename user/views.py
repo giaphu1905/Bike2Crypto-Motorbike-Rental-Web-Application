@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
 from .forms import UserUpdateForm
-
-
+from django.db.models import Q
+from rent.models import Order
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 def profile_user(request):                
     user_login = request.user
     context = {'user_login': user_login}
@@ -20,3 +22,63 @@ def profile_user(request):
         context['form'] = form
     return render(request, 'user/profile.html', context)
 
+
+def ds_hoadon(request):                
+    user_login = request.user
+    ds_order_user = user_login.order_set.all()
+    rent_info = request.session.get('rent_infor', {})
+    context = {
+        'user_login': user_login,
+        'ds_order_user': ds_order_user,
+    }
+    
+    return render(request, 'user/ds_hoadon.html', context)
+
+def searchOrder(request):
+    user_login = request.user
+    print(request.GET)
+    query = request.GET.get('search_order')
+    if query:
+        ds_order_user = Order.objects.filter(
+            Q(id__icontains=query) | 
+            Q(xe__loai_xe__icontains=query) |
+            Q(dia_diem__ten__icontains=query)
+        )
+    else:
+        ds_order_user = Order.objects.none()
+
+    context = {
+        'user_login': user_login,
+        'ds_order_user': ds_order_user,
+    }
+
+    return render(request, 'user/ds_hoadon.html', context)
+
+def ChiTietHoaDon(request, id):
+    user_login = request.user
+    order = Order.objects.get(id=id)
+    context = {
+        'user_login': user_login,
+        'order': order,
+    }
+    return render(request, 'user/chitiethoadon.html', context=context)
+
+def change_password(request):
+    user_login = request.user
+    if request.method == 'POST' and request.user.is_authenticated:
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Đổi mật khẩu thành công!')
+            return redirect('rent:logout')
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'user/doimk.html', {
+        'form': form,
+        'user_login': user_login,
+    })

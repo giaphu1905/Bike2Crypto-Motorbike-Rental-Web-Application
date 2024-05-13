@@ -1,12 +1,9 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
-from web3 import Web3
-from django.conf import settings
 from django.db import models
 from django.utils import timezone
-import requests, datetime
-from . import contracts
+import requests
 # Create your models here.
 class XeMay(models.Model):
     ten = models.CharField(max_length=20)
@@ -55,7 +52,10 @@ class PhuKien(models.Model):
 
     def __str__(self):
         return self.ten
-
+class OrderPhuKien(models.Model):
+    order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    phu_kien = models.ForeignKey(PhuKien, on_delete=models.CASCADE)
+    so_luong = models.IntegerField()
 
 class Order(models.Model):
     dia_diem = models.ForeignKey(DiaDiem, related_name='ds_order', on_delete=models.CASCADE, default=get_default_dia_diem)
@@ -64,14 +64,19 @@ class Order(models.Model):
     ngay_thue = models.DateField()
     ngay_tra = models.DateField()
     diachi_nhanxe = models.CharField(max_length=100, blank=True)
+    phu_phi = models.ManyToManyField(PhuKien, through=OrderPhuKien, blank=True)
+    phi_diduongdai = models.IntegerField(default=0)
+    phi_baohiem = models.IntegerField(default=0)
     tong_tien = models.IntegerField()
     def __str__(self):
         return "Thue {} cua {}".format(self.xe.ten, self.nguoi_thue.username)
     
+    def getName(self):
+        return f'Thuê {self.xe.loai_xe} tại {self.dia_diem} ngày {self.ngay_thue.strftime('%d/%m/%Y')}'
     @property
     def thoigian_thue(self):
         if self.ngay_thue and self.ngay_tra:
-            return (self.ngay_tra.date() - self.ngay_thue.date()).days
+            return (self.ngay_tra - self.ngay_thue).days
         return 0
 
     def pending_payments(self):
@@ -80,6 +85,8 @@ class Order(models.Model):
 
     def is_paid(self):
         return self.payments.filter(is_paid=True).exists()
+
+
 
 def get_eth_price_in_vnd():
     response = requests.get('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=vnd')
