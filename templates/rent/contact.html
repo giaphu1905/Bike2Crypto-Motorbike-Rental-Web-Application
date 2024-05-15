@@ -90,7 +90,7 @@
               <button type="submit" class="btn btn-primary" name="action-next" value="next" id="next-step-save-contact">Bước tiếp theo</button>
             </div>
           </div>
-          {% include 'rent/tomluoc.html' with page_name='contact_or_xacnhan' %}
+          {% include 'rent/tomluoc.html' with page_name='contact' %}
         </div>
       </div>
     </div>
@@ -118,5 +118,54 @@
 			};
 			reader.readAsDataURL(input.files[0]);
 		}
+    </script>
+    <script>
+      $(document).ready(function(){
+        $('.save-nhanxe-to-session').on('click', function(e){
+            e.preventDefault();
+    
+            // Send an AJAX request to the server
+            var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+            $.ajax({
+                url: "{% url 'rent:sua-thong-tin-nhan-xe' %}", 
+                method: 'POST',
+                data: {
+                  'csrfmiddlewaretoken': csrftoken,
+                  'order_day': $('#today').val(),
+                  'pickup_location': $('#pickup_location').val(),
+                },
+                success: function(response) {
+                  console.log('Sửa thông tin nhận xe:');
+                  console.log(response);
+                  alert('Sửa thông tin nhận xe thành công!');
+                  location.reload();
+                }
+            });
+        });
+      });
+      $(document).ready(function(){
+        $('.save-traxe-to-session').on('click', function(e){
+            e.preventDefault();
+    
+            // Send an AJAX request to the server
+            var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+            $.ajax({
+                url: "{% url 'rent:sua-thong-tin-tra-xe' %}",
+                method: 'POST',
+                data: {
+                  'csrfmiddlewaretoken': csrftoken,
+                  'return_day': $('#return-day').val(),
+                  'return_location': $('#return_location').val(),
+                },
+                success: function(response) {
+                  console.log('Sửa thông tin trả xe');
+                  console.log(response);
+  
+                  alert('Sửa thông tin trả xe thành công!');
+                  location.reload();
+                }
+            });
+        });
+      });
     </script>
 {% endblock %}

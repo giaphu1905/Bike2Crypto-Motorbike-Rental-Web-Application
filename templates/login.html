@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 {% block title %}Đăng nhập{% endblock %}
 {% block mycss %}
   <link rel="stylesheet" href="{% static 'rent/login/css/main.css'%}">
@@ -19,7 +20,21 @@
                 <span class="login100-form-title p-b-34 p-t-27">
                     Đăng nhập
                 </span>
-
+                <!-- Hiển thị lỗi từ form -->
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ field.label }}: {% trans error %}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{% trans error %}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
                 <div class="wrap-input100 validate-input" data-validate = "Enter username">
                     <input class="input100" type="text" name="username" placeholder="Username">
                     <span class="focus-input100" data-placeholder="&#xf207;"></span>

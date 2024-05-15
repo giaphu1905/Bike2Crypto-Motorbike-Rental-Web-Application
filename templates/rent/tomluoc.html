@@ -19,18 +19,20 @@
           <div class="col-md-12 car-rental-summary-pickup" style="padding: 0;">
             <div class="control-label workflow-summary-title">
               Thông tin nhận xe &nbsp;
-              <a class="car-rental-summary-edit-pick-up-date" href="#popup" data-url="" aria-label="Edit Pickup"><i class="fas fa-pencil-alt" title=""></i></a>
+              {% if page_name != 'xac_nhan' %}
+                <a class="car-rental-summary-edit-pick-up-date" href="#popup" data-url="" aria-label="Edit Pickup"><i class="fas fa-pencil-alt" title=""></i></a>
+              {% endif %}
             </div> {{ rent_info.order_day  }} <br/>
-            <span class="car-rental-summary-pick-up-location">Địa điểm: {{ dia_diem_nhan_xe.dia_chi_cu_the }}</span>           
+            <span class="car-rental-summary-pick-up-location">Địa điểm: {% if page_name == 'contact' %} {{ rent_info.address }}{% else %}{{ dia_diem_nhan_xe.dia_chi_cu_the }} {% endif %}</span>           
           </div>
           <!-- Popup sửa thông tin nhận xe -->
           <div class="popup" id="popup">
             <div class="popup__content">
               <h2 class="heading-secondary">Sửa thông tin nhận xe</h2>
               <h4 class="heading-tertiary">Ngày nhận xe:</h4>
-              <p class="popup__text">
-                <input class="second-row-input form-control" id="today" type="date" name="order_day">
-              </p>
+                <p class="popup__text">
+                  <input class="second-row-input form-control" id="today" type="date" name="order_day">
+                </p>
               <h4 class="heading-tertiary">Địa điểm nhận xe:</h4>
               <p class="popup__text">
                 <select id="pickup_location" class="selectpicker form-control" name="pickup_location">
@@ -40,7 +42,7 @@
                   {% endfor %}
                 </select>
               </p>
-              <a href="#" class="button">Close Popup</a>
+              <a href="#" class="button">Đóng</a>
               <a href="" class="button save-nhanxe-to-session">Sửa thông tin</a>
             </div>
           </div>
@@ -49,8 +51,10 @@
           <div class="col-md-12 car-rental-summary-return" style="padding: 5px 0 0;">
             <div class="control-label">
               Thông tin trả xe &nbsp;
-              <a class="modal-open car-rental-summary-edit-return-date" href="#popup-tra" data-url="" aria-label="Edit Return"><i class="fas fa-pencil-alt" title=""></i></a>
-            </div> {{ rent_info.return_day  }} 
+              {% if page_name != 'xac_nhan' %}
+                <a class="modal-open car-rental-summary-edit-return-date" href="#popup-tra" data-url="" aria-label="Edit Return"><i class="fas fa-pencil-alt" title=""></i></a>
+              {% endif %}
+              </div> {{ rent_info.return_day  }} 
             <br />
             <span class="car-rental-summary-return-location">Địa điểm: {{ dia_diem_tra_xe.dia_chi_cu_the }}</span>
             <br />
@@ -72,7 +76,7 @@
                   {% endfor %}
                 </select>
               </p>
-              <a href="#" class="button">Close Popup</a>
+              <a href="#" class="button">Đóng</a>
               <a href="" class="button save-traxe-to-session">Sửa thông tin</a>
             </div>
           </div>
@@ -158,7 +162,7 @@
             </ul>
           </div>
         </div>
-        {% if page_name == 'contact_or_xacnhan' %}
+        {% if page_name == 'contact' or page_name == 'xac_nhan' %}
           {% if rent_info.di_duong_dai and rent_info.di_duong_dai != 0 %}
           <div class="row car-rental-additional-charges">
             <div class="col-md-12" style="padding: 0;">
@@ -226,7 +230,7 @@
       </div>
     </div>
   </div>
-    <br />
-    <br />
+  <br />
+  <br />
 </div>
 

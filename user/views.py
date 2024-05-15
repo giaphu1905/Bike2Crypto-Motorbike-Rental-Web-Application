@@ -3,9 +3,12 @@ from django.urls import reverse
 from django.contrib import messages
 from .forms import UserUpdateForm
 from django.db.models import Q
-from rent.models import Order
+from rent.models import Order, Payment
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
 def profile_user(request):                
     user_login = request.user
     context = {'user_login': user_login}
@@ -82,3 +85,19 @@ def change_password(request):
         'form': form,
         'user_login': user_login,
     })
+
+@require_POST
+def cancel_order(request, id):
+    order = Order.objects.get(id=id)
+    order.bi_huy = True
+    order.save()
+    return JsonResponse({'status': 'Order cancelled successfully'})
+
+@require_POST
+def thanh_toan_user(request, id):
+    order = Order.objects.get(id=id)
+    payment = Payment()
+    payment.order = order
+    payment.save()
+    redirect_url = reverse('rent:thanh-toan', args=[id, payment.id])
+    return JsonResponse({'redirect_url': redirect_url})

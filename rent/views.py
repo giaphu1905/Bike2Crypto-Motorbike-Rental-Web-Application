@@ -11,6 +11,7 @@ from user.forms import UserUpdateForm
 from django.views.generic import FormView
 from datetime import datetime, timedelta
 from django.db.models import Min
+from django.conf import settings
 class XeMayAPI(View):
     def get(self, request, *args, **kwargs):
         dia_diem_id = request.GET.get('dia_diem_id')
@@ -85,8 +86,8 @@ class ThueXeView(LoginRequiredMixin,View):
         return_day = rent_info.get('return_day', (datetime.now() + timedelta(days=1)).strftime("%d/%m/%Y"))
         order_day_date = parse_date(order_day).date()
         return_day_date = parse_date(return_day).date()
-        thoigian_thue = (return_day_date - order_day_date).days
-        
+        thoigian_thue = max(1, (return_day_date - order_day_date).days)
+        rent_info['pickup_location'] = kwargs['pickup_location']
         rent_info['thoigian_thue'] = thoigian_thue
         try:
             rent_info['order_day'] = order_day_date.strftime("%d/%m/%Y")
@@ -96,7 +97,7 @@ class ThueXeView(LoginRequiredMixin,View):
         dia_diem_nhan_xe = DiaDiem.objects.get(ten=kwargs['pickup_location'])
         try:
             dia_diem_tra_xe = DiaDiem.objects.get(ten=rent_info['return_location'])
-        except DiaDiem.DoesNotExist:
+        except:
             dia_diem_tra_xe = dia_diem_nhan_xe
             rent_info['return_location']=kwargs['pickup_location']
         request.session['rent_info'] = rent_info
@@ -128,20 +129,26 @@ class PhuKienView(LoginRequiredMixin,View):
         xe_thue = XeMay.objects.get(id=kwargs['vehicle_id'])
         rent_info['gia_thue_xemay'] = rent_info['thoigian_thue']*xe_thue.gia
         rent_info['xe_thue_id'] = kwargs['vehicle_id']
-        request.session['rent_info'] = rent_info
-        ds_phukien = PhuKien.objects.all()
+        order_day = rent_info.get('order_day', datetime.now().strftime("%d/%m/%Y"))
+        return_day = rent_info.get('return_day', (datetime.now() + timedelta(days=1)).strftime("%d/%m/%Y"))
+        order_day_date = parse_date(order_day).date()
+        return_day_date = parse_date(return_day).date()
+        thoigian_thue = max(1, (return_day_date - order_day_date).days)
         dia_diem_nhan_xe = DiaDiem.objects.get(ten=kwargs['pickup_location'])
         try:
             dia_diem_tra_xe = DiaDiem.objects.get(ten=rent_info['return_location'])
-        except DiaDiem.DoesNotExist:
+        except:
             dia_diem_tra_xe = dia_diem_nhan_xe
+            rent_info['return_location']=kwargs['pickup_location']
+        rent_info['thoigian_thue'] = thoigian_thue
+        request.session['rent_info'] = rent_info
         context = {
             'rent_info': rent_info,
             'user_login': request.user,
             'dia_diems': DiaDiem.objects.all(),
             'dia_diem_nhan_xe': dia_diem_nhan_xe,
             'dia_diem_tra_xe': dia_diem_tra_xe,
-            'ds_phukien': ds_phukien,
+            'ds_phukien': PhuKien.objects.all(),
             'xe_thue': xe_thue,
         }
         return render(request, 'rent/phukien.html', context)
@@ -221,6 +228,7 @@ class ConfirmView(LoginRequiredMixin,View):
             'user_login': request.user,
             'dia_diem_nhan_xe': dia_diem_nhan_xe,
             'dia_diem_tra_xe': dia_diem_tra_xe,
+            'xe_thue': XeMay.objects.get(id=kwargs['vehicle_id']),
             'loai_xe_thue': XeMay.objects.get(id=vehicle_id).loai_xe,
             'gia_thue': XeMay.objects.get(id=vehicle_id).gia,
         }
@@ -293,6 +301,7 @@ class PaymentView(FormView):
             'order_id': kwargs['order_id'],
             'loai_xe_thue': XeMay.objects.get(id=rent_info['xe_thue_id']).loai_xe,
             'payment': payment,
+            'admin_ether_address': settings.ETHER_ADDRESS,
         }
         # Add more context variables here
         return render(request, 'payment/thanhtoan.html', context)
@@ -324,7 +333,7 @@ def SuaThongTinNhanXe(request):
             pass
         pickup_location = request.POST.get('pickup_location')
         rent_info['pickup_location'] = pickup_location
-        dia_diem_nhan_xe = DiaDiem.objects.get(ten=pickup_location)
+        rent_info['thoigian_thue'] = (parse_date(rent_info['return_day']).date() - order_day_date).days
         request.session['rent_info'] = rent_info
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
@@ -342,6 +351,7 @@ def SuaThongTinTraXe(request):
         if return_location == 'Chọn địa điểm trả xe':
             return_location = rent_info['pickup_location']
         rent_info['return_location'] = return_location
+        rent_info['thoigian_thue'] = (return_day_date - parse_date(rent_info['order_day']).date()).days
         request.session['rent_info'] = rent_info
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
@@ -357,3 +367,14 @@ def GioiThieu(request):
 def LienHe(request):
     user_login = request.user
     return render(request, 'other/lienhe.html', {'user_login': user_login})
+
+def get_dia_diem_loai_xe(request):
+    loai_xe = request.POST.get('loai_xe')
+    dia_diem_ids = XeMay.objects.filter(loai_xe=loai_xe).values_list('dia_diem', flat=True).distinct()
+    ds_dia_diem_theo_xe = DiaDiem.objects.filter(id__in=dia_diem_ids)
+    return JsonResponse({'ds_dia_diem_theo_xe': list(ds_dia_diem_theo_xe.values())})
+
+def get_min_vehicle_id_at_location(request):
+    pickup_location = request.POST.get('pickup_location')
+    vehicle_id = DiaDiem.objects.get(ten=pickup_location).get_min_vehicle_id()
+    return JsonResponse({'vehicle_id': vehicle_id})

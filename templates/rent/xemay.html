@@ -1,4 +1,5 @@
 {% load humanize %}
+{% load static %}
 <div class="row flex-wrap">
   <div class="col-md-9 col-sm-9 col-xs-12 car-rental-main-container">
     <div class="box box-open">
@@ -9,18 +10,17 @@
         {% for xemay in ds_xemay %}
         <div class="row">
           <div class="col-md-3 col-sm-3 col-xs-12">
-            <img class="image-lazy-load img-responsive" src="" style="display: block;" />
+            <img class="image-lazy-load img-responsive" src="{% static 'images/xemay/'|add:xemay.loai_xe|add:'.png' %}" style="display: block; max-width: 100%;" />
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <h4 class="no-margin-top">{{ xemay.loai_xe }}</h4>
           </div>
           <div class="col-md-3 col-sm-3 col-xs-12 text-right selectable">
-            <!--<h3 class="no-margin-top car-rental-vehicle-class-recommended"><span class="label label-info display-block no-rounded-corners">Đề xuất</span></h3>-->
             <div class="panel panel-default no-margin-bottom text-right">
               <div class="panel-heading" style="padding-top: 1px;padding-left: 10px;padding-right: 10px;">
                 <div class="full-width car-rental-vehicle-class-rack-rate-details car-rental-vehicle-class-rack-rate-details-2">
                   <h2 class="d-flex" style="font-size: 20px;">
-                    ₫<div id="price-per-day"> {{ xemay.gia|intcomma }}</div>
+                    <div > {{ xemay.gia|intcomma }}₫</div>
                     <small class="day-label">/Ngày</small>
                   </h2>
                 </div>

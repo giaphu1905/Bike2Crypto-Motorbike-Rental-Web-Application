@@ -40,8 +40,11 @@ class DiaDiem(models.Model):
     
     @property
     def ds_xe_hienco(self):
-        return self.ds_xe.filter(da_duoc_thue=False, dang_hong=False)
+        return self.ds_xemay.filter(da_duoc_thue=False, dang_hong=False)
 
+    def get_min_vehicle_id(self):
+        min_id_vehicle = self.ds_xe_hienco.order_by('id').first()
+        return min_id_vehicle.id if min_id_vehicle else None
 def get_default_dia_diem():
     return DiaDiem.objects.get(ten='Sài Gòn').id
 
@@ -67,6 +70,7 @@ class Order(models.Model):
     phu_phi = models.ManyToManyField(PhuKien, through=OrderPhuKien, blank=True)
     phi_diduongdai = models.IntegerField(default=0)
     phi_baohiem = models.IntegerField(default=0)
+    bi_huy = models.BooleanField(default=False)
     tong_tien = models.IntegerField()
     def __str__(self):
         return "Thue {} cua {}".format(self.xe.ten, self.nguoi_thue.username)

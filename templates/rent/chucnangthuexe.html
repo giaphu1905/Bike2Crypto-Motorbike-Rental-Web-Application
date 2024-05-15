@@ -1,5 +1,6 @@
 {% extends 'home_base.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %}
   Đặt xe tại {{ rent_info.pickup_location }}
 {% endblock %}
@@ -60,7 +61,7 @@
           // Send an AJAX request to the server
           var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
           $.ajax({
-              url: "{% url 'rent:sua-thong-tin-nhan-xe' %}", // Replace with the actual URL
+              url: "{% url 'rent:sua-thong-tin-nhan-xe' %}", 
               method: 'POST',
               data: {
                 'csrfmiddlewaretoken': csrftoken,
@@ -83,7 +84,7 @@
           // Send an AJAX request to the server
           var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
           $.ajax({
-              url: "{% url 'rent:sua-thong-tin-tra-xe' %}", // Replace with the actual URL
+              url: "{% url 'rent:sua-thong-tin-tra-xe' %}",
               method: 'POST',
               data: {
                 'csrfmiddlewaretoken': csrftoken,

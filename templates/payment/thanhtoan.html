@@ -35,7 +35,7 @@
               <div class="paymentcard">
                 <div class="product-container">
                   <div class="image">
-                    <img src="{% static 'images/xemay/airblade.png' %}" alt="International-Women-s-Day-Facebook-Post" border="0" />
+                    <img src="{% static 'images/xemay/'|add:loai_xe_thue|add:'.png' %}" border="0" />
                   </div>
                   <div class="details">
                     <h1 class="cost">đ{{rent_info.tong_tien_thue|intcomma}}</h1>
@@ -73,7 +73,7 @@
                     <div class="cookiesContent" id="cookiesPopup">
                       <button class="close" data-bs-dismiss="modal" aria-label="Close" onclick="location.href='{% url "rent:thanh-cong-payment" order_id=order_id payment_id=payment.id %}'">✖</button>
                       <img src="{% static 'images/metamask.png' %}" alt="metamask-img" />
-                      <p>Bạn đã thanh toán thành công {{payment.amount}} ETH cho địa chỉ: 0xad713ad7d094C8d1F9A91FFBFBA43612f96ca2Ea</p>
+                      <p>Bạn đã thanh toán thành công {{payment.amount}} ETH cho địa chỉ: {{admin_ether_address}}</p>
                       <button class="accept" data-bs-dismiss="modal" onclick="location.href='{% url "rent:thanh-cong-payment" order_id=order_id payment_id=payment.id %}'">OK!</button>
                     </div>
                   </div>
@@ -125,7 +125,7 @@
             // The user's active address.
             from: account,
             // Required except during contract publications.
-            to: "0xad713ad7d094C8d1F9A91FFBFBA43612f96ca2Ea",
+            to: "{{ admin_ether_address }}",
             value: "0x" + Web3.utils.toBN(Web3.utils.toWei(amount, "ether")).toString(16),
             gasLimit: '0x5028',
             maxPriorityFeePerGas: '0x3b9aca00',

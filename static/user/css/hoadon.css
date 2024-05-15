@@ -102,3 +102,31 @@
 .text-right {
     text-align: right;
 }
+
+.stamp {
+    position: absolute;
+    top: 42%;
+    left: 73%;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+    width: 200px;
+    height: auto;
+}
+.btn-huy {
+    position: absolute;
+    top: 16%;
+    left: 73%;
+    opacity: 0.8;
+}
+
+.btn-thanhtoan {
+    position: absolute;
+    top: 93%;
+    left: 77%;
+    opacity: 0.8;
+}
+
+.btn-huy:hover,.btn-thanhtoan:hover {
+    opacity: 1;
+}
+

@@ -12,24 +12,21 @@
         <div class="collapse navbar-collapse d-flex flex-lg-fill justify-content-between" id="navbarNav">
             <ul class="navbar-nav align-items-center ml-auto">
                 <li class="nav-item">
-                    <a href="{% url 'rent:home' %}"><img src="{% static 'images/logo.png' %}" alt="logo" width="70" height="70"></a>
+                    <h5 class="mb-0"><a href="{% url 'rent:home' %}"><img src="{% static 'images/logo.png' %}" alt="logo" width="70" height="70"></a></h5>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white mx-4" href="{% url 'rent:home' %}">Trang chủ</a>
+                    <h5 class="mb-0"><a class="nav-link text-white mx-4" href="{% url 'rent:home' %}"><span>TRANG CHỦ</span></a></h5>
                 </li>
             </ul>                    
             <ul class="navbar-nav align-items-center ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url 'rent:home' %}">THUÊ XE MÁY</a>
+                    <h5 class="mb-0"><a class="nav-link text-white" href="{% url 'rent:chinh-sach' %}">CHÍNH SÁCH</a></h5>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url 'rent:chinh-sach' %}">CHÍNH SÁCH</a>
+                    <h5 class="mb-0"><a class="nav-link text-white" href="{% url 'rent:gioi-thieu' %}">GIỚI THIỆU</a></h5>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url 'rent:gioi-thieu' %}">GIỚI THIỆU</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url 'rent:lien-he' %}">LIÊN HỆ</a>
+                    <h5 class="mb-0"><a class="nav-link text-white" href="{% url 'rent:lien-he' %}">LIÊN HỆ</a></h5>
                 </li>
                 <li class="nav-item dropdown">
                     <button type="button" class="d-flex align-items-center mx-4" data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" data-offset="0, 20"  style="background-color: #5c9bc2;border: 0;">    
@@ -52,5 +49,5 @@
 {% block content %}{% endblock %}
 
 {% block myjs %}
-    <!--<script src="{% static 'main/main.js' %}"></script>-->
+
 {% endblock %}

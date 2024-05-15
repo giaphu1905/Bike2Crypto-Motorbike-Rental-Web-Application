@@ -44,7 +44,7 @@
                                     </div>
                                     <form class="finalbuttons" method="post">
                                       {% csrf_token %}
-                                      <a href="" class="btn btn-info">Xem Đặt Chỗ Của Tôi</a>
+                                      <a href="{% url 'user:order-detail' id=order_id%}" class="btn btn-info">Xem chi tiết hóa đơn</a>
                                       <button type="submit" class="btn btn-info">Thanh toán trực tuyến</button>
                                     </form>
                                 </div>

@@ -118,3 +118,7 @@ body {
     color: red;
 }
 
+.nav-item a.nav-link:hover {
+    background-color: #a7d0ea;
+    cursor: pointer;
+}

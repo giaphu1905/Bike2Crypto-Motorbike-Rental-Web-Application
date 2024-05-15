@@ -1,5 +1,6 @@
 {% extends 'home_base.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %}
   Đặt xe tại {{ rent_info.pickup_location }}
 {% endblock %}
@@ -73,7 +74,7 @@
               <div class="box-fields">
                 <div class="row">
                   <div class="col-md-3 col-sm-3 col-xs-12 car-rental-step-2-image-column">
-                    <img class="image-lazy-load img-responsive" src="" style="display: block;">
+                    <img class="image-lazy-load img-responsive" src="{% static 'images/xemay/'|add:loai_xe_thue|add:'.png' %}" style="display: block; max-width:100%">
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-12 car-rental-step-2-description-column">
                     <h4 class="no-margin-top">{{ loai_xe_thue }}</h4>
@@ -83,10 +84,10 @@
                     <div class="panel panel-default no-margin-bottom text-right">
                       <div class="panel-heading" style="padding-top: 1px;padding-left: 10px;padding-right: 10px;">
                         <div class="full-width car-rental-vehicle-class-rack-rate-details car-rental-vehicle-class-rack-rate-details-2">
-                          <h2 style="font-size: 20px;">₫{{ gia_thue }}<small class="day-label">/Ngày</small></h2>
+                          <h2 style="font-size: 20px;">₫{{ gia_thue|intcomma }}<small class="day-label">/Ngày</small></h2>
                         </div>
                         <div class="full-width car-rental-vehicle-class-one-day-price-details car-rental-vehicle-class-one-day-price-details-2">
-                          <h5 style="font-size: 13px;">₫400.000 cho 2 Ngày</h5>
+                          <h5 style="font-size: 13px;">{{rent_info.gia_thue_xemay|intcomma}}đ cho {{rent_info.thoigian_thue}} Ngày</h5>
                         </div>
                         <h6>không bao gồm thuế và bảo hiểm</h6>
                       </div>
@@ -159,7 +160,7 @@
               
             </div>
           </div>  
-          {% include 'rent/tomluoc.html' with page_name='contact_or_xacnhan' %}      
+          {% include 'rent/tomluoc.html' with page_name='xac_nhan' %}      
       </div>
     </div>
   </form>

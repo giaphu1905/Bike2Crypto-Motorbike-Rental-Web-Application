@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
@@ -116,7 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'vi'
-
 TIME_ZONE = 'Asia/Ho_Chi_Minh'
 
 USE_I18N = True
@@ -153,3 +153,4 @@ if DEBUG:
 
 # web3
 INFURA_URL = "https://mainnet.infura.io/v3/f35807463940451cbedc0a31204da026"
+ETHER_ADDRESS = '0x8171bCfb79a556504291D0D8b45975CcAFe68357'
