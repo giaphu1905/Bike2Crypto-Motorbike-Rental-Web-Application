@@ -13,7 +13,7 @@ class UserProfile(AbstractUser):
     fullname = models.CharField(max_length=50, blank=True, default="")
     date_of_birth = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='M')
-    phone_number = models.CharField(max_length=11, unique=True, blank=True)
+    phone_number = models.CharField(max_length=10)
     address = models.CharField(max_length=100)
     banglai = models.ImageField(upload_to='banglai/', null=True, blank=True)
 

@@ -2,7 +2,7 @@
 {% load static %}
 {% load humanize %}
 {% block title %}
-  Đặt xe tại {{ rent_info.pickup_location }}
+  Thanh toán
 {% endblock %}
 
 {% block mycss %}
@@ -15,14 +15,12 @@
 {% block content %}
   <div class="page-cover location-page-cover">
     <div class="overlay-color"></div>
-    <div class="container">
-      <h1 class="page-title text-center">Đặt xe tại {{ rent_info.pickup_location }}</h1>
-    </div>
+    <h1 class="page-title text-center">Đặt xe tại {{ payment.order.dia_diem.ten }}</h1>
   </div>
   <p id="breadcrumbs">
     <span>
       <span><a href="/home">Trang chủ</a></span> »
-      <span class="breadcrumb_last" aria-current="page"><strong>Đặt xe tại {{ rent_info.pickup_location }}</strong></span>
+      <span class="breadcrumb_last" aria-current="page"><strong>Thanh toán hóa đơn #{{ payment.order.id }}</strong></span>
     </span>
   </p>
   <div class="d-flex">
@@ -38,7 +36,7 @@
                     <img src="{% static 'images/xemay/'|add:loai_xe_thue|add:'.png' %}" border="0" />
                   </div>
                   <div class="details">
-                    <h1 class="cost">đ{{rent_info.tong_tien_thue|intcomma}}</h1>
+                    <h1 class="cost">đ{{ payment.order.tong_tien|intcomma }}</h1>
                     <h3 class="title">{{loai_xe_thue}}</h3>
                   </div>
                 </div>

@@ -12,6 +12,9 @@ from django.views.generic import FormView
 from datetime import datetime, timedelta
 from django.db.models import Min
 from django.conf import settings
+from user.models import UserProfile
+from django.core.exceptions import ValidationError
+
 class XeMayAPI(View):
     def get(self, request, *args, **kwargs):
         dia_diem_id = request.GET.get('dia_diem_id')
@@ -43,6 +46,10 @@ class Signup(View):
     def post(self, request, *args, **kwargs):
         form = SignUpForm(request.POST)
         if form.is_valid():
+            phone_number = form.cleaned_data.get('phone_number')
+            if UserProfile.objects.filter(phone_number=phone_number).exists():
+                form.add_error('phone_number', ValidationError("Số điện thoại đã tồn tại"))
+                return render(request, 'signup.html', {'form_signup': form})
             user = form.save()
             login(request, user)
             print('dang ky thanh cong')
@@ -293,13 +300,11 @@ class ThanhCongView(LoginRequiredMixin,View):
 
 class PaymentView(FormView):
     def get(self, request, *args, **kwargs):
-        rent_info = self.request.session.get('rent_info', {})
         payment = get_object_or_404(Payment, id=self.kwargs['payment_id'])
         context = {
             'user_login': request.user,
-            'rent_info': rent_info,
             'order_id': kwargs['order_id'],
-            'loai_xe_thue': XeMay.objects.get(id=rent_info['xe_thue_id']).loai_xe,
+            'loai_xe_thue': payment.order.xe.loai_xe,
             'payment': payment,
             'admin_ether_address': settings.ETHER_ADDRESS,
         }
