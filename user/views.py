@@ -91,6 +91,8 @@ def cancel_order(request, id):
     order = Order.objects.get(id=id)
     order.bi_huy = True
     order.save()
+    order.xe.da_duoc_thue = False
+    order.xe.save()
     return JsonResponse({'status': 'Order cancelled successfully'})
 
 @require_POST

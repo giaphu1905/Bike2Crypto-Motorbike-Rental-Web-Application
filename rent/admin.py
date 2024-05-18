@@ -6,10 +6,16 @@ admin.site.site_title = admin.site.site_header
 # Register your models here.
 class XeMayAdmin(admin.ModelAdmin):
     exclude = ('loai_xe',)  # không hiển thị
-    list_display = ['ten','dia_diem']
+    list_display = ['ten','dia_diem', 'da_duoc_thue', 'dang_hong']
     search_fields = ['ten', 'dia_diem__ten', 'loai_xe']
-    list_filter = ['ten', 'dia_diem', 'loai_xe']
+    list_filter = ['ten', 'dia_diem', 'loai_xe', 'da_duoc_thue', 'dang_hong']
 
+    @admin.display(boolean=True)
+    def da_duoc_thue(self, obj):
+        return obj.da_duoc_thue
+    @admin.display(boolean=True)
+    def dang_hong(self, obj):
+        return obj.dang_hong
 class DiaDiemAdmin(admin.ModelAdmin):
     list_display = ['ten', 'dia_chi_cu_the']
 

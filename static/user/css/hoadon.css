@@ -105,7 +105,7 @@
 
 .stamp {
     position: absolute;
-    top: 42%;
+    top: 59%;
     left: 73%;
     transform: translate(-50%, -50%);
     opacity: 0.6;
@@ -114,15 +114,15 @@
 }
 .btn-huy {
     position: absolute;
-    top: 16%;
-    left: 73%;
+    top: 20%;
+    left: 80%;
     opacity: 0.8;
 }
 
 .btn-thanhtoan {
     position: absolute;
-    top: 93%;
-    left: 77%;
+    top: 120%;
+    left: 84%;
     opacity: 0.8;
 }
 

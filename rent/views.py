@@ -64,6 +64,8 @@ class Home(LoginRequiredMixin, View):
     redirect_field_name = 'next'
 
     def get(self, request):
+        if 'rent_info' in request.session:
+            del request.session['rent_info']
         context = {
             'user_login': request.user,
             'dia_diems': DiaDiem.objects.all(),
@@ -134,10 +136,13 @@ class PhuKienView(LoginRequiredMixin,View):
     def get(self, request, *args, **kwargs):
         rent_info = request.session.get('rent_info', {})
         xe_thue = XeMay.objects.get(id=kwargs['vehicle_id'])
-        rent_info['gia_thue_xemay'] = rent_info['thoigian_thue']*xe_thue.gia
+
         rent_info['xe_thue_id'] = kwargs['vehicle_id']
         order_day = rent_info.get('order_day', datetime.now().strftime("%d/%m/%Y"))
         return_day = rent_info.get('return_day', (datetime.now() + timedelta(days=1)).strftime("%d/%m/%Y"))
+        rent_info['pickup_location'] = kwargs['pickup_location']
+        rent_info['order_day'] = order_day
+        rent_info['return_day'] = return_day
         order_day_date = parse_date(order_day).date()
         return_day_date = parse_date(return_day).date()
         thoigian_thue = max(1, (return_day_date - order_day_date).days)
@@ -148,6 +153,7 @@ class PhuKienView(LoginRequiredMixin,View):
             dia_diem_tra_xe = dia_diem_nhan_xe
             rent_info['return_location']=kwargs['pickup_location']
         rent_info['thoigian_thue'] = thoigian_thue
+        rent_info['gia_thue_xemay'] = thoigian_thue*xe_thue.gia
         request.session['rent_info'] = rent_info
         context = {
             'rent_info': rent_info,
@@ -334,14 +340,15 @@ def SuaThongTinNhanXe(request):
         order_day_date = parse_date(order_day).date()
         try:
             rent_info['order_day'] = order_day_date.strftime("%d/%m/%Y")
-        except:
+        except Exception as e:
             pass
         pickup_location = request.POST.get('pickup_location')
+        print("Thông tin nhận ", pickup_location)
         rent_info['pickup_location'] = pickup_location
         rent_info['thoigian_thue'] = (parse_date(rent_info['return_day']).date() - order_day_date).days
         request.session['rent_info'] = rent_info
-        return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+        return JsonResponse({'status': 'success', 'vehicle_id': rent_info.get('xe_thue_id', '')})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method', 'error': str(e), 'vehicle_id': rent_info['xe_thue_id']})
 
 def SuaThongTinTraXe(request):
     if request.method == 'POST':
@@ -350,7 +357,7 @@ def SuaThongTinTraXe(request):
         return_day_date = parse_date(return_day).date()
         try:
             rent_info['return_day'] = return_day_date.strftime("%d/%m/%Y")
-        except:
+        except Exception as e:
             pass
         return_location = request.POST.get('return_location')
         if return_location == 'Chọn địa điểm trả xe':
@@ -359,7 +366,7 @@ def SuaThongTinTraXe(request):
         rent_info['thoigian_thue'] = (return_day_date - parse_date(rent_info['order_day']).date()).days
         request.session['rent_info'] = rent_info
         return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method', 'error': str(e)})
 
 def ChinhSachThueXeMay(request):
     user_login = request.user

@@ -31,11 +31,11 @@
               <h2 class="heading-secondary">Sửa thông tin nhận xe</h2>
               <h4 class="heading-tertiary">Ngày nhận xe:</h4>
                 <p class="popup__text">
-                  <input class="second-row-input form-control" id="today" type="date" name="order_day">
+                  <input class="second-row-input form-control" id="today" type="date" name="order_day" required>
                 </p>
               <h4 class="heading-tertiary">Địa điểm nhận xe:</h4>
               <p class="popup__text">
-                <select id="pickup_location" class="selectpicker form-control" name="pickup_location">
+                <select id="pickup_location" class="selectpicker form-control" name="pickup_location" required>
                   <option>Chọn điểm nhận xe</option> 
                   {% for dia_diem in dia_diems %}
                       <option>{{ dia_diem.ten }}</option>
@@ -65,11 +65,11 @@
               <h2 class="heading-secondary">Sửa thông tin trả xe</h2>
               <h4 class="heading-tertiary">Ngày trả xe:</h4>
               <p class="popup__text">
-                <input class="second-row-input form-control" id="return-day" type="date" name="return_day">
+                <input class="second-row-input form-control" id="return-day" type="date" name="return_day" required>
               </p>
               <h4 class="heading-tertiary">Địa điểm trả xe:</h4>
               <p class="popup__text">
-                <select id="return_location" class="selectpicker form-control" name="return_location">
+                <select id="return_location" class="selectpicker form-control" name="return_location" required>
                   <option>Chọn điểm trả xe</option> 
                   {% for dia_diem in dia_diems %}
                       <option>{{ dia_diem.ten }}</option>
